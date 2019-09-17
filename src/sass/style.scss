@@ -1,5 +1,70 @@
-$body-color: red;
+$body-color: #EFEFEF;
+$carousel-width: 13rem;
+$carousel-height: 120px;
+
 
 body {
-  background-color: $body-color;
+    background-color: $body-color;
+}
+
+.crs-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.crs-move-btn {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.crs-move-left-btn {
+    background-image: url("/images/arrow-left-solid.svg");
+}
+
+.crs-move-right-btn {
+    background-image: url("/images/arrow-right-solid.svg");
+}
+
+.seeing-crs {
+    width: $carousel-width;
+    height: $carousel-height;
+    overflow: hidden;
+}
+
+.crs-item-ul {
+    margin: 0;
+    padding: 0;
+    width: $carousel-width * 4; // 데이터에 따라 가변적으로 설정해주어야 함
+    height: $carousel-height;
+    white-space: nowrap;
+    display: flex;
+}
+
+.crs-item-wrap-li {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: $carousel-width;
+    height: $carousel-height;
+    border: none;
+    background-color: #0d71bb;
+    list-style-type: none;
+    animation: moveLeft 0.1s linear;
+}
+
+@keyframes moveLeft {
+    from {
+        width: 0;
+    }
+    to {
+        width: $carousel-width;
+    }
 }
