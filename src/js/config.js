@@ -3,6 +3,7 @@ const config = {
     miniCarouselHeight: "12rem",
     miniCarouselAnimationDuration: 500, // ms unit
     classNames: {
+        miniCarouselMain: "mini-carousel-main",
         miniCarouselWrapperClassName: "crs-wrap",
         miniCarouselViewportWrapClassName: "crs-viewport-wrap",
         miniCarouselViewportClassName: "viewport-crs",
