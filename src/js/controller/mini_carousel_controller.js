@@ -9,10 +9,10 @@ class MiniCarouselController {
     handleEvent(e) {
         switch (e.target.classList[0]) {
             case config.classNames.miniCarouselLeftBtnClassName:
-                this.moveLeftHandler(e.target);
+                this.moveLeftHandler(e.target.classList[0]);
                 break;
             case config.classNames.miniCarouselRightBtnClassName:
-                this.moveRightHandler(e.target);
+                this.moveRightHandler(e.target.classList[0]);
                 break;
             default:
                 console.log(e.target);
@@ -32,41 +32,34 @@ class MiniCarouselController {
 
     moveLeftHandler(target) {
         const crsUl = document.querySelector(`.${config.classNames.miniCarouselUlClassName}`);
-        this.moveLeft(crsUl);
-        crsUl.addEventListener("transitionend", this.restoreMovedTransLeft);
+        const crsLis = crsUl.querySelectorAll(`.${config.classNames.miniCarouselLiClassName}`);
+        const crsLastLi = crsLis[crsLis.length - 1];
+        this.move(crsUl, true);
+        crsUl.prepend(crsLastLi);
+        const restore = () => {
+            crsUl.style.transition = "none";
+            crsUl.style.transform = "none";
+            crsUl.removeEventListener("transitionend", restore);
+        };
+        crsUl.addEventListener("transitionend", restore);
     }
 
     moveRightHandler(target) {
         const crsUl = document.querySelector(`.${config.classNames.miniCarouselUlClassName}`);
-        this.moveRight(crsUl);
-        crsUl.addEventListener("transitionend", this.restoreMovedTransRight);
-    }
-
-    moveLeft(ul) {
-        ul.style.transition = `all ${config.miniCarouselAnimationDuration}ms`;
-        ul.style.transform = `translateX(${config.miniCarouselWidth})`;
-    }
-
-    moveRight(ul) {
-        ul.style.transition = `all ${config.miniCarouselAnimationDuration}ms`;
-        ul.style.transform = `translateX(-${config.miniCarouselWidth})`;
-    }
-
-    restoreMovedTransLeft(e) {
-        const crsUl = e.target;
-        const crsLis = crsUl.querySelectorAll(`.${config.classNames.miniCarouselLiClassName}`);
-        const crsLastLi = crsLis[crsLis.length - 1];
-        crsUl.prepend(crsLastLi);
-        crsUl.style.transition = "none";
-        crsUl.style.transform = "none";
-    }
-
-    restoreMovedTransRight(e) {
-        const crsUl = e.target;
         const crs1stLi = crsUl.querySelector(`.${config.classNames.miniCarouselLiClassName}`);
+        this.move(crsUl, false);
         crsUl.appendChild(crs1stLi);
-        crsUl.style.transition = "none";
-        crsUl.style.transform = "none";
+        const restore = () => {
+            crsUl.style.transition = "none";
+            crsUl.style.transform = "none";
+            crsUl.removeEventListener("transitionend", restore);
+        };
+        crsUl.addEventListener("transitionend", restore);
+    }
+
+    move(ul, direction) {
+        ul.style.transition = `all ${config.miniCarouselAnimationDuration}ms`;
+        ul.style.transform = direction ? `translateX(${config.miniCarouselWidth})` : `translateX(-${config.miniCarouselWidth})`;
     }
 }
 
