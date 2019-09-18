@@ -1,19 +1,22 @@
+import config from "../config";
+
 class MiniCarouselModel {
     constructor() {
-        this.miniCarousel = `
-            <div class="crs-wrap">
-                <div class="crs-move-left-btn crs-move-btn"></div>
-                <div class="seeing-crs">
-                    <ul class="crs-item-ul">
-                        <li class="crs-item-wrap-li" posidx=1>1번마</li>
-                        <li class="crs-item-wrap-li" posidx=2>2번마</li>
-                        <li class="crs-item-wrap-li" posidx=3>3번마</li>
-                        <li class="crs-item-wrap-li" posidx=4>4번마</li>
+        this.miniCarouselHTML = `
+            <div class="${config.classNames.miniCarouselWrapperClassName}">
+                <div class="${config.classNames.miniCarouselLeftBtnClassName} ${config.classNames.miniCarouselMoveBtnClassName}"></div>
+                <div class="${config.classNames.miniCarouselViewportClassName}">
+                    <ul class="${config.classNames.miniCarouselUlClassName}">
+                        <li class="${config.classNames.miniCarouselLiClassName}" posidx=1>1번마</li>
+                        <li class="${config.classNames.miniCarouselLiClassName}" posidx=2>2번마</li>
+                        <li class="${config.classNames.miniCarouselLiClassName}" posidx=3>3번마</li>
+                        <li class="${config.classNames.miniCarouselLiClassName}" posidx=4>4번마</li>
                     </ul>
                 </div>
-                <div class="crs-move-right-btn crs-move-btn"></div>
+                <div class="${config.classNames.miniCarouselRightBtnClassName} ${config.classNames.miniCarouselMoveBtnClassName}"></div>
             </div>
         `;
     }
 }
+
 export default MiniCarouselModel

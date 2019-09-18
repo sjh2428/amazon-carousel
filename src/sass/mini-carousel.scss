@@ -1,0 +1,54 @@
+$mini-carousel-width: 13rem;
+$mini-carousel-height: 8rem;
+
+.crs-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.crs-move-btn {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.crs-move-left-btn {
+    background-image: url("/images/arrow-left-solid.svg");
+}
+
+.crs-move-right-btn {
+    background-image: url("/images/arrow-right-solid.svg");
+}
+
+.seeing-crs {
+    width: $mini-carousel-width;
+    height: $mini-carousel-height;
+    overflow: hidden;
+}
+
+.crs-item-ul {
+    margin: 0;
+    padding: 0;
+    width: $mini-carousel-width * 4; // 데이터에 따라 가변적으로 설정해주어야 함
+    height: $mini-carousel-height;
+    white-space: nowrap;
+    display: flex;
+}
+
+.crs-item-wrap-li {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: $mini-carousel-width;
+    height: $mini-carousel-height;
+    border: none;
+    background-color: #0d71bb;
+    list-style-type: none;
+}

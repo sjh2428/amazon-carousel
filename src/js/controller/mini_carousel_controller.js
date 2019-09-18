@@ -1,4 +1,5 @@
 import toPx from "to-px";
+import config from "../config.js";
 
 class MiniCarouselController {
     constructor(model) {
@@ -7,10 +8,10 @@ class MiniCarouselController {
 
     handleEvent(e) {
         switch (e.target.classList[0]) {
-            case "crs-move-left-btn":
+            case config.classNames.miniCarouselLeftBtnClassName:
                 this.moveLeftHandler(e.target);
                 break;
-            case "crs-move-right-btn":
+            case config.classNames.miniCarouselRightBtnClassName:
                 this.moveRightHandler(e.target);
                 break;
             default:
@@ -18,52 +19,48 @@ class MiniCarouselController {
         }
     }
 
-    getModelMiniCarousel() {
-        return this.model.miniCarousel;
+    getModelMiniCarouselHTML() {
+        return this.model.miniCarouselHTML;
     }
 
     scrollSetting() {
-        document.querySelector(".seeing-crs").scrollLeft
-            = Math.floor(document.querySelectorAll(".crs-item-wrap-li").length / 2) * toPx("13rem");
+        document.querySelector(`.${config.classNames.miniCarouselViewportClassName}`).scrollLeft
+            = Math.floor(
+                document.querySelectorAll(
+                    `.${config.classNames.miniCarouselLiClassName}`).length / 2) * toPx(config.miniCarouselWidth);
     }
 
     moveLeftHandler(target) {
-        const crsUl = document.querySelector(".crs-item-ul");
-        const crsLis = crsUl.querySelectorAll("li");
+        const crsUl = document.querySelector(`.${config.classNames.miniCarouselUlClassName}`);
+        const crsLis = crsUl.querySelectorAll(`.${config.classNames.miniCarouselLiClassName}`);
         const crsLastLi = crsLis[crsLis.length - 1];
-        // crsUl.prepend(crsLastLi);
-        crsLastLi.style.width = "0";
-        crsUl.prepend(crsLastLi);
-        const frame = (pos) => {
-            if (pos > 13) {
-                crsLastLi.style.width = "13rem";
-            } else {
-                pos += 2;
-                crsLastLi.style.width = `${pos}rem`;
-                requestAnimationFrame(() => {
-                    frame(pos);
-                });
-            }
-        };
-        frame(0);
+        this.moveLeft(crsUl, crsLastLi);
     }
 
     moveRightHandler(target) {
-        const crsUl = document.querySelector(".crs-item-ul");
-        const crs1stLi = crsUl.querySelector("li");
-        const frame = (pos) => {
-            if (pos < 0) {
-                crsUl.appendChild(crs1stLi);
-                crs1stLi.style.width = "13rem";
-            } else {
-                pos -= 2;
-                crs1stLi.style.width = `${pos}rem`;
-                requestAnimationFrame(() => {
-                    frame(pos);
-                });
-            }
-        };
-        frame(13);
+        const crsUl = document.querySelector(`.${config.classNames.miniCarouselUlClassName}`);
+        const crs1stLi = crsUl.querySelector(`.${config.classNames.miniCarouselLiClassName}`);
+        this.moveRight(crsUl, crs1stLi);
+    }
+
+    moveLeft(ul, li) {
+        ul.style.transition = `all ${config.miniCarouselAnimationDuration}ms`;
+        ul.style.transform = `translateX(${config.miniCarouselWidth})`;
+        setTimeout(() => {
+            ul.prepend(li);
+            ul.style.transition = "none";
+            ul.style.transform = "none";
+        }, config.miniCarouselAnimationDuration);
+    }
+
+    moveRight(ul, li) {
+        ul.style.transition = `all ${config.miniCarouselAnimationDuration}ms`;
+        ul.style.transform = `translateX(-${config.miniCarouselWidth})`;
+        setTimeout(() => {
+            ul.appendChild(li);
+            ul.style.transition = "none";
+            ul.style.transform = "none";
+        }, config.miniCarouselAnimationDuration);
     }
 }
 
