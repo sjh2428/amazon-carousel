@@ -32,35 +32,41 @@ class MiniCarouselController {
 
     moveLeftHandler(target) {
         const crsUl = document.querySelector(`.${config.classNames.miniCarouselUlClassName}`);
-        const crsLis = crsUl.querySelectorAll(`.${config.classNames.miniCarouselLiClassName}`);
-        const crsLastLi = crsLis[crsLis.length - 1];
-        this.moveLeft(crsUl, crsLastLi);
+        this.moveLeft(crsUl);
+        crsUl.addEventListener("transitionend", this.restoreMovedTransLeft);
     }
 
     moveRightHandler(target) {
         const crsUl = document.querySelector(`.${config.classNames.miniCarouselUlClassName}`);
-        const crs1stLi = crsUl.querySelector(`.${config.classNames.miniCarouselLiClassName}`);
-        this.moveRight(crsUl, crs1stLi);
+        this.moveRight(crsUl);
+        crsUl.addEventListener("transitionend", this.restoreMovedTransRight);
     }
 
-    moveLeft(ul, li) {
+    moveLeft(ul) {
         ul.style.transition = `all ${config.miniCarouselAnimationDuration}ms`;
         ul.style.transform = `translateX(${config.miniCarouselWidth})`;
-        setTimeout(() => {
-            ul.prepend(li);
-            ul.style.transition = "none";
-            ul.style.transform = "none";
-        }, config.miniCarouselAnimationDuration);
     }
 
-    moveRight(ul, li) {
+    moveRight(ul) {
         ul.style.transition = `all ${config.miniCarouselAnimationDuration}ms`;
         ul.style.transform = `translateX(-${config.miniCarouselWidth})`;
-        setTimeout(() => {
-            ul.appendChild(li);
-            ul.style.transition = "none";
-            ul.style.transform = "none";
-        }, config.miniCarouselAnimationDuration);
+    }
+
+    restoreMovedTransLeft(e) {
+        const crsUl = e.target;
+        const crsLis = crsUl.querySelectorAll(`.${config.classNames.miniCarouselLiClassName}`);
+        const crsLastLi = crsLis[crsLis.length - 1];
+        crsUl.prepend(crsLastLi);
+        crsUl.style.transition = "none";
+        crsUl.style.transform = "none";
+    }
+
+    restoreMovedTransRight(e) {
+        const crsUl = e.target;
+        const crs1stLi = crsUl.querySelector(`.${config.classNames.miniCarouselLiClassName}`);
+        crsUl.appendChild(crs1stLi);
+        crsUl.style.transition = "none";
+        crsUl.style.transform = "none";
     }
 }
 

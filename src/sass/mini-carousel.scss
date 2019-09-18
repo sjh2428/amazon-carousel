@@ -1,12 +1,48 @@
-$mini-carousel-width: 13rem;
-$mini-carousel-height: 8rem;
+$mini-carousel-width: 16rem;
+$mini-carousel-height: 12rem;
+$mini-carousel-wrap: ".crs-wrap";
+$mini-carousel-viewport-wrap: ".crs-viewport-wrap";
+$mini-carousel-viewport: ".viewport-crs";
+$mini-carousel-left-btn: ".crs-move-left-btn";
+$mini-carousel-right-btn: ".crs-move-right-btn";
+$mini-carousel-move-btn: ".crs-move-btn";
+$mini-carousel-ul: ".crs-item-ul";
+$mini-carousel-li: ".crs-item-wrap-li";
+$mini-carousel-shadow: ".crs-shadow";
+$mini-carousel-shadow-left: ".shadow-left";
+$mini-carousel-shadow-right: ".shadow-right";
+$benefit-wrap: ".benefit-wrap";
+$benefit-header: ".benefit-header";
+$benefit-content: ".benefit-content";
+$benefit-footer: ".benefit-footer";
+$benefit-font-color: #002F36;
 
-.crs-wrap {
+#{$mini-carousel-wrap} {
+    width: 100%;
+    height: $mini-carousel-height * 1.3;
     display: flex;
     align-items: center;
+    justify-content: space-around;
 }
 
-.crs-move-btn {
+#{$mini-carousel-shadow} {
+    position: relative;
+    width: 5px;
+    height: $mini-carousel-height;
+    z-index: -1;
+}
+
+#{$mini-carousel-shadow-left} {
+    left: 7px;
+    box-shadow: -5px 0px 10px 0px rgba(0,0,0,0.8);
+}
+
+#{$mini-carousel-shadow-right} {
+    right: 7px;
+    box-shadow: 5px 0px 10px 0px rgba(0,0,0,0.8);
+}
+
+#{$mini-carousel-move-btn} {
     margin: 0;
     padding: 0;
     display: flex;
@@ -19,21 +55,28 @@ $mini-carousel-height: 8rem;
     cursor: pointer;
 }
 
-.crs-move-left-btn {
+#{$mini-carousel-left-btn} {
     background-image: url("/images/arrow-left-solid.svg");
 }
 
-.crs-move-right-btn {
+#{$mini-carousel-right-btn} {
     background-image: url("/images/arrow-right-solid.svg");
 }
 
-.seeing-crs {
+#{$mini-carousel-viewport} {
     width: $mini-carousel-width;
     height: $mini-carousel-height;
     overflow: hidden;
 }
 
-.crs-item-ul {
+#{$mini-carousel-viewport-wrap} {
+    width: $mini-carousel-width * 1.3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#{$mini-carousel-ul} {
     margin: 0;
     padding: 0;
     width: $mini-carousel-width * 4; // 데이터에 따라 가변적으로 설정해주어야 함
@@ -42,7 +85,7 @@ $mini-carousel-height: 8rem;
     display: flex;
 }
 
-.crs-item-wrap-li {
+#{$mini-carousel-li} {
     position: relative;
     margin: 0;
     padding: 0;
@@ -53,5 +96,36 @@ $mini-carousel-height: 8rem;
     a img {
         width: 100%;
         height: 100%;
+    }
+}
+
+#{$benefit-wrap} {
+    width: $mini-carousel-width * 1.5;
+    height: $mini-carousel-height;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: $benefit-font-color;
+}
+
+#{$benefit-header} {
+    margin-top: 0;
+    font-size: 2rem;
+    line-height: 1.8rem;
+}
+
+#{$benefit-content} {
+    font-size: 0.9rem;
+}
+
+#{$benefit-footer} {
+    margin-top: 2rem;
+    font-weight: 500;
+    a {
+        text-decoration: none;
+        color: $benefit-font-color;
+    }
+    a:hover {
+        text-decoration: underline;
     }
 }
