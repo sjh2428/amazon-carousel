@@ -49,6 +49,9 @@ $mini-carousel-height: 8rem;
     width: $mini-carousel-width;
     height: $mini-carousel-height;
     border: none;
-    background-color: #0d71bb;
     list-style-type: none;
+    a img {
+        width: 100%;
+        height: 100%;
+    }
 }
