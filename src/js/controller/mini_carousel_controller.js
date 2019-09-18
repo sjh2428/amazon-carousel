@@ -35,8 +35,8 @@ class MiniCarouselController {
         const crsLis = crsUl.querySelectorAll(`.${config.classNames.miniCarouselLiClassName}`);
         const crsLastLi = crsLis[crsLis.length - 1];
         this.move(crsUl, true);
-        crsUl.prepend(crsLastLi);
         const restore = () => {
+            crsUl.prepend(crsLastLi);
             crsUl.style.transition = "none";
             crsUl.style.transform = "none";
             crsUl.removeEventListener("transitionend", restore);
@@ -48,8 +48,8 @@ class MiniCarouselController {
         const crsUl = document.querySelector(`.${config.classNames.miniCarouselUlClassName}`);
         const crs1stLi = crsUl.querySelector(`.${config.classNames.miniCarouselLiClassName}`);
         this.move(crsUl, false);
-        crsUl.appendChild(crs1stLi);
         const restore = () => {
+            crsUl.appendChild(crs1stLi);
             crsUl.style.transition = "none";
             crsUl.style.transform = "none";
             crsUl.removeEventListener("transitionend", restore);
