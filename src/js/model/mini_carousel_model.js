@@ -1,7 +1,13 @@
 import config from "../config";
 import miniCarouselData from "../miniCarouselData";
 
+/**
+ * model class for mini carousel
+ */
 class MiniCarouselModel {
+    /**
+     * set mini carousel HTML
+     */
     constructor() {
         this.miniCarouselHTML = `
             <div class="${config.classNames.miniCarouselWrapperClassName}">

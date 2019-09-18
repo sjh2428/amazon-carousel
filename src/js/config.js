@@ -2,6 +2,7 @@ const config = {
     miniCarouselWidth: "16rem",
     miniCarouselHeight: "12rem",
     miniCarouselAnimationDuration: 500, // ms unit
+    miniCarouselIntervalTime: 3000, // ms unit
     classNames: {
         miniCarouselMain: "mini-carousel-main",
         miniCarouselWrapperClassName: "crs-wrap",
