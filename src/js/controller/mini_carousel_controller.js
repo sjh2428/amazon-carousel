@@ -12,26 +12,30 @@ class MiniCarouselController {
      */
     constructor(model) {
         this.model = model;
+        this.direction = {
+            LEFT: true,
+            RIGHT: false
+        }
         this.interval = setInterval(() => this.moveRightHandler(), config.miniCarouselIntervalTime);
     }
 
     /**
      * init auto sliding per every click and diverge left, right btn to handler
      *
-     * @param {event} e clicked target
+     * @param {String} className first class name in element
      */
-    handleEvent(e) {
+    handleEvent(className) {
         clearInterval(this.interval);
         this.interval = setInterval(() => this.moveRightHandler(), config.miniCarouselIntervalTime);
-        switch (e.target.classList[0]) {
+        switch (className) {
             case config.classNames.miniCarouselLeftBtn:
-                this.moveLeftHandler(e.target.classList[0]);
+                this.moveLeftHandler(className);
                 break;
             case config.classNames.miniCarouselRightBtn:
-                this.moveRightHandler(e.target.classList[0]);
+                this.moveRightHandler(className);
                 break;
             default:
-                console.log(e.target);
+                console.log(className);
         }
     }
 
@@ -61,7 +65,7 @@ class MiniCarouselController {
         const crsUl = document.querySelector(`.${config.classNames.miniCarouselUl}`);
         const crsLis = crsUl.querySelectorAll(`.${config.classNames.miniCarouselLi}`);
         const crsLastLi = crsLis[crsLis.length - 1];
-        this.move(crsUl, true);
+        this.move(crsUl, this.direction.LEFT);
         const restore = () => {
             crsUl.prepend(crsLastLi);
             crsUl.style.transition = "none";
@@ -76,7 +80,7 @@ class MiniCarouselController {
     moveRightHandler() {
         const crsUl = document.querySelector(`.${config.classNames.miniCarouselUl}`);
         const crs1stLi = crsUl.querySelector(`.${config.classNames.miniCarouselLi}`);
-        this.move(crsUl, false);
+        this.move(crsUl, this.direction.RIGHT);
         const restore = () => {
             crsUl.appendChild(crs1stLi);
             crsUl.style.transition = "none";
