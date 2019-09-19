@@ -3,7 +3,7 @@ import CarouselView from "./view/carousel_view";
 import CarouselModel from "./model/carousel_model";
 import CarouselController from "./controller/carousel_controller";
 import miniCarouselData from "./model/data/mini_carousel";
-import miniCarouselConfig from "./mini_carousel_config";
+import miniCarouselConfig from "./config/mini_carousel_config";
 
 const MiniCarouselInit = () => {
     const Model = new CarouselModel(miniCarouselData);
