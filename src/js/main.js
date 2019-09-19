@@ -5,8 +5,8 @@ import MiniCarouselController from "./controller/mini_carousel_controller";
 
 const MiniCarouselInit = () => {
     const Model = new MiniCarouselModel();
-    const Controller = new MiniCarouselController(Model);
-    const View = new MiniCarouselView(Controller);
+    const View = new MiniCarouselView(Model);
+    const Controller = new MiniCarouselController(View);
 };
 
 MiniCarouselInit();

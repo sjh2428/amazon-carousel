@@ -6,17 +6,20 @@ import config from "../config.js";
  */
 class MiniCarouselController {
     /**
-     * set interval for auto sliding and save model to this object
+     * set interval for auto sliding and save view class to this.view object
      *
-     * @param {Class} model model for mini carousel
+     * @param {Class} view view for mini carousel
      */
-    constructor(model) {
+    constructor(view) {
         const { miniCarouselIntervalTime } = config;
-        this.model = model;
+        this.view = view;
         this.direction = {
             LEFT: true,
             RIGHT: false
         }
+        this.view.render();
+        this.view.mainDOM.addEventListener("click", (e) => this.handleEvent(e.target.classList[0]));
+        this.scrollSetting();
         this.interval = setInterval(() => this.moveRightHandler(), miniCarouselIntervalTime);
     }
 
@@ -39,15 +42,6 @@ class MiniCarouselController {
             default:
                 console.log(className);
         }
-    }
-
-    /**
-     * get mini carousel HTML in model object
-     *
-     * @returns {string} mini carousel HTML
-     */
-    getModelMiniCarouselHTML() {
-        return this.model.miniCarouselHTML;
     }
 
     /**
