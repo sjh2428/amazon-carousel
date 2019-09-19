@@ -18,9 +18,7 @@ class CardCarouselController {
             RIGHT: false
         }
         this.view.render();
-        console.log(view.mainDOM);
         this.view.mainDOM.addEventListener("click", (e) => this.handleEvent(e.target.classList[0]));
-        this.scrollSetting();
     }
 
     /**
@@ -29,7 +27,7 @@ class CardCarouselController {
      * @param {String} className first class name in element
      */
     handleEvent(className) {
-        const { intervalTime, classNames: { leftBtn, rightBtn } } = this.config;
+        const { classNames: { leftBtn, rightBtn } } = this.config;
         switch (className) {
             case leftBtn:
                 this.moveLeftHandler(className);
@@ -40,17 +38,6 @@ class CardCarouselController {
             default:
                 console.log(className);
         }
-    }
-
-    /**
-     * set initial scroll position
-     */
-    scrollSetting() {
-        const { width, classNames: { viewport, li } } = this.config;
-        document.querySelector(`.${ viewport }`).scrollLeft
-            = Math.floor(
-                document.querySelectorAll(
-                    `.${li}`).length / 2) * toPx(width);
     }
 
     /**

@@ -32,7 +32,6 @@ $card-height: 12rem;
     height: $carousel-main-height;
     display: flex;
     align-items: center;
-    justify-content: space-around;
 }
 
 #{$card-crs-move-btn} {
@@ -141,6 +140,7 @@ $card-height: 12rem;
     align-items: center;
     width: $carousel-main-width;
     height: $carousel-main-height;
+    margin-top: 3rem;
 }
 
 #{$card-container-wrap} {
@@ -172,8 +172,8 @@ $card-height: 12rem;
     justify-content: center;
     width: $card-width;
     height: $card-height * 0.8;
-    background-size: 1100px auto, 100%, 100%;
-    background-image: url("https://images-na.ssl-images-amazon.com/images/G/01/marketing/prime/detail_page/InteractivePlane_TILES_SpriteSheet_A._CB513333159_.png");
+    background-size: 1200px auto, 100%, 100%;
+    // background-image: url("https://images-na.ssl-images-amazon.com/images/G/01/marketing/prime/detail_page/InteractivePlane_TILES_SpriteSheet_A._CB513333159_.png");
 }
 
 #{$card-title} {
@@ -198,4 +198,8 @@ $card-height: 12rem;
         border-radius: 8px;
         cursor: pointer;
     }
+}
+
+.selected-card {
+    transform: scale(1.3);
 }

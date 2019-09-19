@@ -17,6 +17,7 @@ const mainCarouselConfig = {
     intervalTime: 3000, // ms unit
     classNames: {
         main: "card-crs-main",
+        containerWrap: "card-container-wrap",
         wrapper: "card-crs-wrap",
         viewportWrap: "card-crs-viewport-wrap",
         viewport: "card-viewport-crs",

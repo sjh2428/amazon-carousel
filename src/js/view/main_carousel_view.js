@@ -10,27 +10,52 @@ class CardCarouselView {
     constructor(model, config) {
         this.model = model;
         this.config = config;
-        const { main } = this.config.classNames;
-        this.mainDOM = document.querySelector(`.${main}`);
+        const { containerWrap } = this.config.classNames;
+        this.mainDOM = document.querySelector(`.${containerWrap}`);
     }
 
     getHTML() {
-        const data = this.model.getMiniCarouselData();
+        const { card, carousel } = this.model.getMiniCarouselData();
         const { 
             classNames: {
-                wrapper, viewportWrap, leftBtn, moveBtn, viewport, ul, li, rightBtn, contentContainer,
-                contentWrap, contentBody, contentHeader, contentCategory, contentFooter
+                main, wrapper, viewportWrap, leftBtn, moveBtn, viewport, ul, li, rightBtn,
+                contentContainer, contentWrap, contentBody, contentHeader, contentCategory, contentFooter
             } 
         } = this.config;
-        let html = /*html*/`
-        <div class="${wrapper}">
-            <div class="${viewportWrap}">
-                <div class="${leftBtn} ${moveBtn}"></div>
-                <div class="${viewport}">
-                    <ul class="${ul}">`;
+        const {
+            container: cardContainer, wrapper: cardWrapper, image: cardImage, 
+            title: cardTitle, btnsWrapper: cardBtnsWrapper
+        } = this.config.card.classNames;
+        
         let idx = 0;
-        Object.keys(data.carousel).forEach(key => {
-            for (const categoryData of data.carousel[key]) {
+        let html = /*html*/`
+        <div class="${cardContainer}">`
+        Object.keys(card).forEach(key => {
+            html += /*html*/`
+            <div class="${cardWrapper}">
+                <div class="${cardImage}" style="background-image: url('${card[key].imgSrc}')">
+                    <div class="${cardTitle}">${key}</div>
+                </div>
+                <div class="${cardBtnsWrapper}">`
+                carousel[key].forEach(_ => {
+                    html += /*html*/`
+                    <div idx=${idx++}></div>`;
+                });
+            html += /*html*/`
+                </div>
+            </div>`;
+        });
+        html += /*html*/`
+        </div>
+        <div class="${main}">
+            <div class="${wrapper}">
+                <div class="${viewportWrap}">
+                    <div class="${leftBtn} ${moveBtn}"></div>
+                    <div class="${viewport}">
+                        <ul class="${ul}">`;
+        idx = 0;
+        Object.keys(carousel).forEach(key => {
+            for (const categoryData of carousel[key]) {
                 const { image, title, head, body, tail, link } = categoryData;
                 html += /*html*/`
                     <li class="${li}" posidx=${idx++}>
@@ -49,8 +74,9 @@ class CardCarouselView {
             }
         });
         html += /*html*/`</ul>
+                    </div>
+                    <div class="${rightBtn} ${moveBtn}"></div>
                 </div>
-                <div class="${rightBtn} ${moveBtn}"></div>
             </div>
         </div>`;
         return html;
