@@ -3,7 +3,7 @@ import toPx from "to-px";
 /**
  * controller for carousel
  */
-class CarouselController {
+class CardCarouselController {
     /**
      * set interval for auto sliding and save view class to this.view object
      *
@@ -13,7 +13,6 @@ class CarouselController {
     constructor(view, config) {
         this.view = view;
         this.config = config;
-        const { intervalTime } = this.config;
         this.direction = {
             LEFT: true,
             RIGHT: false
@@ -22,7 +21,6 @@ class CarouselController {
         console.log(view.mainDOM);
         this.view.mainDOM.addEventListener("click", (e) => this.handleEvent(e.target.classList[0]));
         this.scrollSetting();
-        this.interval = setInterval(() => this.moveRightHandler(), intervalTime);
     }
 
     /**
@@ -32,8 +30,6 @@ class CarouselController {
      */
     handleEvent(className) {
         const { intervalTime, classNames: { leftBtn, rightBtn } } = this.config;
-        clearInterval(this.interval);
-        this.interval = setInterval(() => this.moveRightHandler(), intervalTime);
         switch (className) {
             case leftBtn:
                 this.moveLeftHandler(className);
@@ -103,4 +99,4 @@ class CarouselController {
     }
 }
 
-export default CarouselController
+export default CardCarouselController

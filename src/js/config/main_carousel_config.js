@@ -11,12 +11,12 @@ const mainCarouselConfig = {
             btnsWrapper: "card-btns-wrapper"
         }
     },
-    width: "16rem",
-    height: "12rem",
+    width: "65rem",
+    height: "20rem",
     animationDuration: 500, // ms unit
     intervalTime: 3000, // ms unit
     classNames: {
-        main: "card-carousel-main",
+        main: "card-crs-main",
         wrapper: "card-crs-wrap",
         viewportWrap: "card-crs-viewport-wrap",
         viewport: "card-viewport-crs",
@@ -28,12 +28,13 @@ const mainCarouselConfig = {
         moveBtn: "card-crs-move-btn",
         ul: "card-crs-item-ul",
         li: "card-crs-item-wrap-li",
-        benefitWrap: "card-benefit-wrap",
-        benefitHeader: "card-benefit-header",
-        benefitContent: "card-benefit-content",
-        benefitFooter: "card-benefit-footer"
-    },
-    footerLink: ""
+        contentWrap: "card-crs-content-wrap",
+        contentContainer: "card-content-container",
+        contentCategory: "card-crs-content-category",
+        contentHeader: "card-crs-content-header",
+        contentBody: "card-crs-content-content",
+        contentFooter: "card-crs-content-footer"
+    }
 };
 
 export default mainCarouselConfig

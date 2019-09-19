@@ -11,6 +11,7 @@ class CarouselView {
         this.model = model;
         this.config = config;
         const { main } = this.config.classNames;
+        console.log(main);
         this.mainDOM = document.querySelector(`.${main}`);
     }
 
