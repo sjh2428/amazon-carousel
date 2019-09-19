@@ -11,12 +11,13 @@ class MiniCarouselController {
      * @param {Class} model model for mini carousel
      */
     constructor(model) {
+        const { miniCarouselIntervalTime } = config;
         this.model = model;
         this.direction = {
             LEFT: true,
             RIGHT: false
         }
-        this.interval = setInterval(() => this.moveRightHandler(), config.miniCarouselIntervalTime);
+        this.interval = setInterval(() => this.moveRightHandler(), miniCarouselIntervalTime);
     }
 
     /**
@@ -25,13 +26,14 @@ class MiniCarouselController {
      * @param {String} className first class name in element
      */
     handleEvent(className) {
+        const { miniCarouselIntervalTime, classNames: { miniCarouselLeftBtn, miniCarouselRightBtn } } = config;
         clearInterval(this.interval);
-        this.interval = setInterval(() => this.moveRightHandler(), config.miniCarouselIntervalTime);
+        this.interval = setInterval(() => this.moveRightHandler(), miniCarouselIntervalTime);
         switch (className) {
-            case config.classNames.miniCarouselLeftBtn:
+            case miniCarouselLeftBtn:
                 this.moveLeftHandler(className);
                 break;
-            case config.classNames.miniCarouselRightBtn:
+            case miniCarouselRightBtn:
                 this.moveRightHandler(className);
                 break;
             default:
@@ -52,18 +54,20 @@ class MiniCarouselController {
      * set initial scroll position
      */
     scrollSetting() {
-        document.querySelector(`.${config.classNames.miniCarouselViewport}`).scrollLeft
+        const { miniCarouselWidth, classNames: { miniCarouselViewport, miniCarouselLi } } = config;
+        document.querySelector(`.${miniCarouselViewport}`).scrollLeft
             = Math.floor(
                 document.querySelectorAll(
-                    `.${config.classNames.miniCarouselLi}`).length / 2) * toPx(config.miniCarouselWidth);
+                    `.${miniCarouselLi}`).length / 2) * toPx(miniCarouselWidth);
     }
 
     /**
      * after move left, restore to origin position
      */
     moveLeftHandler() {
-        const crsUl = document.querySelector(`.${config.classNames.miniCarouselUl}`);
-        const crsLis = crsUl.querySelectorAll(`.${config.classNames.miniCarouselLi}`);
+        const { miniCarouselUl, miniCarouselLi } = config.classNames;
+        const crsUl = document.querySelector(`.${miniCarouselUl}`);
+        const crsLis = crsUl.querySelectorAll(`.${miniCarouselLi}`);
         const crsLastLi = crsLis[crsLis.length - 1];
         this.move(crsUl, this.direction.LEFT);
         const restore = () => {
@@ -78,8 +82,9 @@ class MiniCarouselController {
      * after move right, restore to origin position
      */
     moveRightHandler() {
-        const crsUl = document.querySelector(`.${config.classNames.miniCarouselUl}`);
-        const crs1stLi = crsUl.querySelector(`.${config.classNames.miniCarouselLi}`);
+        const { miniCarouselUl, miniCarouselLi } = config.classNames;
+        const crsUl = document.querySelector(`.${miniCarouselUl}`);
+        const crs1stLi = crsUl.querySelector(`.${miniCarouselLi}`);
         this.move(crsUl, this.direction.RIGHT);
         const restore = () => {
             crsUl.appendChild(crs1stLi);
@@ -96,8 +101,9 @@ class MiniCarouselController {
      * @param {Boolean} direction true - left, false - right
      */
     move(ul, direction) {
-        ul.style.transition = `all ${config.miniCarouselAnimationDuration}ms`;
-        ul.style.transform = direction ? `translateX(${config.miniCarouselWidth})` : `translateX(-${config.miniCarouselWidth})`;
+        const { miniCarouselAnimationDuration, miniCarouselWidth } = config;
+        ul.style.transition = `all ${miniCarouselAnimationDuration}ms`;
+        ul.style.transform = direction ? `translateX(${miniCarouselWidth})` : `translateX(-${miniCarouselWidth})`;
     }
 }
 
