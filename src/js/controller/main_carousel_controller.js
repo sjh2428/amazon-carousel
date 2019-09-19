@@ -18,26 +18,37 @@ class CardCarouselController {
             RIGHT: false
         }
         this.view.render();
-        this.view.mainDOM.addEventListener("click", (e) => this.handleEvent(e.target.classList[0]));
+        this.view.mainDOM.addEventListener("click", (e) => this.handleEvent(e));
     }
 
-    /**
-     * init auto sliding per every click and diverge left, right btn to handler
-     *
-     * @param {String} className first class name in element
-     */
-    handleEvent(className) {
+    handleEvent(e) {
+        const { classList } = e.target;
         const { classNames: { leftBtn, rightBtn } } = this.config;
-        switch (className) {
+        const { image } = this.config.card.classNames;
+        switch (classList[0]) {
             case leftBtn:
-                this.moveLeftHandler(className);
+                this.moveLeftHandler(classList[0]);
                 break;
             case rightBtn:
-                this.moveRightHandler(className);
+                this.moveRightHandler(classList[0]);
+                break;
+            case image:
+                this.cardHandler(e.target);
                 break;
             default:
-                console.log(className);
+                console.log(classList[0]);
         }
+    }
+
+    cardHandler(target) {
+        const { wrapper, selectedCard, btnsWrapper } = this.config.card.classNames;
+        for (const element of document.querySelectorAll(`.${wrapper}`)) {
+            element.classList.remove(selectedCard);
+            element.querySelector(`.${btnsWrapper}`).style.display = "none";
+        }
+        const { classList } = target.parentNode;
+        target.parentNode.querySelector(`.${btnsWrapper}`).style.display = "flex";
+        classList.add(selectedCard);
     }
 
     /**

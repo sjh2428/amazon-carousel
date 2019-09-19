@@ -187,7 +187,7 @@ $card-height: 12rem;
     bottom: 1rem;
     width: $card-width * 0.4;
     height: 1rem;
-    display: flex;
+    display: none;
     justify-content: space-around;
     align-items: center;
     & > * {
@@ -201,4 +201,5 @@ $card-height: 12rem;
 
 .selected-card {
     transform: scale(1.3);
+    z-index: 1;
 }
