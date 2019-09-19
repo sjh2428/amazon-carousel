@@ -28,12 +28,12 @@ class CarouselView {
                 <div class="${viewport}">
                     <ul class="${ul}">`;
         this.model.getMiniCarouselData().forEach((data, idx) => {
-            const { link, imgSrc, description } = data;
+            const { link, imgSrc, imgAlt } = data;
             html += /*html*/`
                 <li class="${li}" posidx=${idx + 1}>
                     <a href="${link}">
                         <img src="${imgSrc}" 
-                        alt="${description}" target="_blank">
+                        alt="${imgAlt}" target="_blank">
                     </a>
                 </li>
             `;
