@@ -1,5 +1,4 @@
 import toPx from "to-px";
-import config from "../config.js";
 
 /**
  * controller for mini carousel
@@ -10,9 +9,10 @@ class MiniCarouselController {
      *
      * @param {Class} view view for mini carousel
      */
-    constructor(view) {
-        const { miniCarouselIntervalTime } = config;
+    constructor(view, config) {
         this.view = view;
+        this.config = config;
+        const { intervalTime } = this.config;
         this.direction = {
             LEFT: true,
             RIGHT: false
@@ -20,7 +20,7 @@ class MiniCarouselController {
         this.view.render();
         this.view.mainDOM.addEventListener("click", (e) => this.handleEvent(e.target.classList[0]));
         this.scrollSetting();
-        this.interval = setInterval(() => this.moveRightHandler(), miniCarouselIntervalTime);
+        this.interval = setInterval(() => this.moveRightHandler(), intervalTime);
     }
 
     /**
@@ -29,14 +29,14 @@ class MiniCarouselController {
      * @param {String} className first class name in element
      */
     handleEvent(className) {
-        const { miniCarouselIntervalTime, classNames: { miniCarouselLeftBtn, miniCarouselRightBtn } } = config;
+        const { intervalTime, classNames: { leftBtn, rightBtn } } = this.config;
         clearInterval(this.interval);
-        this.interval = setInterval(() => this.moveRightHandler(), miniCarouselIntervalTime);
+        this.interval = setInterval(() => this.moveRightHandler(), intervalTime);
         switch (className) {
-            case miniCarouselLeftBtn:
+            case leftBtn:
                 this.moveLeftHandler(className);
                 break;
-            case miniCarouselRightBtn:
+            case rightBtn:
                 this.moveRightHandler(className);
                 break;
             default:
@@ -48,20 +48,20 @@ class MiniCarouselController {
      * set initial scroll position
      */
     scrollSetting() {
-        const { miniCarouselWidth, classNames: { miniCarouselViewport, miniCarouselLi } } = config;
-        document.querySelector(`.${miniCarouselViewport}`).scrollLeft
+        const { width, classNames: { viewport, li } } = this.config;
+        document.querySelector(`.${ viewport }`).scrollLeft
             = Math.floor(
                 document.querySelectorAll(
-                    `.${miniCarouselLi}`).length / 2) * toPx(miniCarouselWidth);
+                    `.${li}`).length / 2) * toPx(width);
     }
 
     /**
      * after move left, restore to origin position
      */
     moveLeftHandler() {
-        const { miniCarouselUl, miniCarouselLi } = config.classNames;
-        const crsUl = document.querySelector(`.${miniCarouselUl}`);
-        const crsLis = crsUl.querySelectorAll(`.${miniCarouselLi}`);
+        const { ul, li } = this.config.classNames;
+        const crsUl = document.querySelector(`.${ul}`);
+        const crsLis = crsUl.querySelectorAll(`.${li}`);
         const crsLastLi = crsLis[crsLis.length - 1];
         this.move(crsUl, this.direction.LEFT);
         const restore = () => {
@@ -76,9 +76,9 @@ class MiniCarouselController {
      * after move right, restore to origin position
      */
     moveRightHandler() {
-        const { miniCarouselUl, miniCarouselLi } = config.classNames;
-        const crsUl = document.querySelector(`.${miniCarouselUl}`);
-        const crs1stLi = crsUl.querySelector(`.${miniCarouselLi}`);
+        const { ul, li } = this.config.classNames;
+        const crsUl = document.querySelector(`.${ul}`);
+        const crs1stLi = crsUl.querySelector(`.${li}`);
         this.move(crsUl, this.direction.RIGHT);
         const restore = () => {
             crsUl.appendChild(crs1stLi);
@@ -95,9 +95,9 @@ class MiniCarouselController {
      * @param {Boolean} direction true - left, false - right
      */
     move(ul, direction) {
-        const { miniCarouselAnimationDuration, miniCarouselWidth } = config;
-        ul.style.transition = `all ${miniCarouselAnimationDuration}ms`;
-        ul.style.transform = direction ? `translateX(${miniCarouselWidth})` : `translateX(-${miniCarouselWidth})`;
+        const { animationDuration, width } = this.config;
+        ul.style.transition = `all ${animationDuration}ms`;
+        ul.style.transform = direction ? `translateX(${width})` : `translateX(-${width})`;
     }
 }
 

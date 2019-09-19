@@ -1,13 +1,13 @@
-import miniCarouselData from "./data/mini_carousel";
-
 /**
  * model class for mini carousel
  */
-class MiniCarouselModel {
-    constructor() {}
+class CarouselModel {
+    constructor(data) {
+        this.data = data;
+    }
 
     getMiniCarouselData() {
-        return miniCarouselData;
+        return this.data;
         // return fetch("/api/mini-carousel")
         // .then(res => res.json())
         // .then(json => {
@@ -16,4 +16,4 @@ class MiniCarouselModel {
     }
 }
 
-export default MiniCarouselModel
+export default CarouselModel

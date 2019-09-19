@@ -1,12 +1,14 @@
 import "../sass/style.scss"
-import MiniCarouselView from "./view/mini_carousel_view";
-import MiniCarouselModel from "./model/mini_carousel_model";
-import MiniCarouselController from "./controller/mini_carousel_controller";
+import CarouselView from "./view/carousel_view";
+import CarouselModel from "./model/carousel_model";
+import CarouselController from "./controller/carousel_controller";
+import miniCarouselData from "./model/data/mini_carousel";
+import miniCarouselConfig from "./mini_carousel_config";
 
 const MiniCarouselInit = () => {
-    const Model = new MiniCarouselModel();
-    const View = new MiniCarouselView(Model);
-    const Controller = new MiniCarouselController(View);
+    const Model = new CarouselModel(miniCarouselData);
+    const View = new CarouselView(Model, miniCarouselConfig);
+    const Controller = new CarouselController(View, miniCarouselConfig);
 };
 
 MiniCarouselInit();
