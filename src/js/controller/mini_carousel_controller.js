@@ -24,10 +24,10 @@ class MiniCarouselController {
         clearInterval(this.interval);
         this.interval = setInterval(() => this.moveRightHandler(), config.miniCarouselIntervalTime);
         switch (e.target.classList[0]) {
-            case config.classNames.miniCarouselLeftBtnClassName:
+            case config.classNames.miniCarouselLeftBtn:
                 this.moveLeftHandler(e.target.classList[0]);
                 break;
-            case config.classNames.miniCarouselRightBtnClassName:
+            case config.classNames.miniCarouselRightBtn:
                 this.moveRightHandler(e.target.classList[0]);
                 break;
             default:
@@ -48,18 +48,18 @@ class MiniCarouselController {
      * set initial scroll position
      */
     scrollSetting() {
-        document.querySelector(`.${config.classNames.miniCarouselViewportClassName}`).scrollLeft
+        document.querySelector(`.${config.classNames.miniCarouselViewport}`).scrollLeft
             = Math.floor(
                 document.querySelectorAll(
-                    `.${config.classNames.miniCarouselLiClassName}`).length / 2) * toPx(config.miniCarouselWidth);
+                    `.${config.classNames.miniCarouselLi}`).length / 2) * toPx(config.miniCarouselWidth);
     }
 
     /**
      * after move left, restore to origin position
      */
     moveLeftHandler() {
-        const crsUl = document.querySelector(`.${config.classNames.miniCarouselUlClassName}`);
-        const crsLis = crsUl.querySelectorAll(`.${config.classNames.miniCarouselLiClassName}`);
+        const crsUl = document.querySelector(`.${config.classNames.miniCarouselUl}`);
+        const crsLis = crsUl.querySelectorAll(`.${config.classNames.miniCarouselLi}`);
         const crsLastLi = crsLis[crsLis.length - 1];
         this.move(crsUl, true);
         const restore = () => {
@@ -75,8 +75,8 @@ class MiniCarouselController {
      * after move right, restore to origin position
      */
     moveRightHandler() {
-        const crsUl = document.querySelector(`.${config.classNames.miniCarouselUlClassName}`);
-        const crs1stLi = crsUl.querySelector(`.${config.classNames.miniCarouselLiClassName}`);
+        const crsUl = document.querySelector(`.${config.classNames.miniCarouselUl}`);
+        const crs1stLi = crsUl.querySelector(`.${config.classNames.miniCarouselLi}`);
         this.move(crsUl, false);
         const restore = () => {
             crsUl.appendChild(crs1stLi);

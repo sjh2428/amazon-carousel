@@ -5,21 +5,21 @@ const config = {
     miniCarouselIntervalTime: 3000, // ms unit
     classNames: {
         miniCarouselMain: "mini-carousel-main",
-        miniCarouselWrapperClassName: "crs-wrap",
-        miniCarouselViewportWrapClassName: "crs-viewport-wrap",
-        miniCarouselViewportClassName: "viewport-crs",
+        miniCarouselWrapper: "crs-wrap",
+        miniCarouselViewportWrap: "crs-viewport-wrap",
+        miniCarouselViewport: "viewport-crs",
         miniCarouselShadow: "crs-shadow",
         miniCarouselShadowLeft: "shadow-left",
         miniCarouselShadowRight: "shadow-right",
-        miniCarouselLeftBtnClassName: "crs-move-left-btn",
-        miniCarouselRightBtnClassName: "crs-move-right-btn",
-        miniCarouselMoveBtnClassName: "crs-move-btn",
-        miniCarouselUlClassName: "crs-item-ul",
-        miniCarouselLiClassName: "crs-item-wrap-li",
-        benefitWrapClassName: "benefit-wrap",
-        benefitHeaderClassName: "benefit-header",
-        benefitContentClassName: "benefit-content",
-        benefitFooterClassName: "benefit-footer"
+        miniCarouselLeftBtn: "crs-move-left-btn",
+        miniCarouselRightBtn: "crs-move-right-btn",
+        miniCarouselMoveBtn: "crs-move-btn",
+        miniCarouselUl: "crs-item-ul",
+        miniCarouselLi: "crs-item-wrap-li",
+        benefitWrap: "benefit-wrap",
+        benefitHeader: "benefit-header",
+        benefitContent: "benefit-content",
+        benefitFooter: "benefit-footer"
     },
     footerLink: "https://www.amazon.com/gp/video/storefront/ref=dvm_us_aq_np_dhb_be_optorigt1?ie=UTF8&merchId=originals1"
 };
