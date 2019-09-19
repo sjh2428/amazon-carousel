@@ -4,7 +4,7 @@ const mainCarouselConfig = {
     animationDuration: 500, // ms unit
     intervalTime: 3000, // ms unit
     classNames: {
-        main: "mini-carousel-main",
+        main: "card-carousel-main",
         wrapper: "crs-wrap",
         viewportWrap: "crs-viewport-wrap",
         viewport: "viewport-crs",
