@@ -9,7 +9,9 @@ const mainCarouselConfig = {
             image: "card-image",
             title: "card-title",
             btnsWrapper: "card-btns-wrapper",
-            selectedCard: "selected-card"
+            selectedCard: "selected-card",
+            selectedIdxBtn: "selected-idx-btn",
+            cardIdxBtn: "card-idx-btn"
         }
     },
     width: "65rem",

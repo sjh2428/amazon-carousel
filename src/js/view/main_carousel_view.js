@@ -24,7 +24,7 @@ class CardCarouselView {
         } = this.config;
         const {
             container: cardContainer, wrapper: cardWrapper, image: cardImage, 
-            title: cardTitle, btnsWrapper: cardBtnsWrapper
+            title: cardTitle, btnsWrapper: cardBtnsWrapper, cardIdxBtn
         } = this.config.card.classNames;
         
         let idx = 0;
@@ -32,14 +32,14 @@ class CardCarouselView {
         <div class="${cardContainer}">`
         Object.keys(card).forEach(key => {
             html += /*html*/`
-            <div class="${cardWrapper}">
+            <div class="${cardWrapper}" style="background-image: ${card[key].gradient}">
                 <div class="${cardImage}" style="background-image: url('${card[key].imgSrc}')">
                     <div class="${cardTitle}">${key}</div>
                 </div>
                 <div class="${cardBtnsWrapper}">`
                 carousel[key].forEach(_ => {
                     html += /*html*/`
-                    <div idx=${idx++}></div>`;
+                    <div class="${cardIdxBtn}" idx=${idx++}></div>`;
                 });
             html += /*html*/`
                 </div>

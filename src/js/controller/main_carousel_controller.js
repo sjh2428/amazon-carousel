@@ -24,7 +24,7 @@ class CardCarouselController {
     handleEvent(e) {
         const { classList } = e.target;
         const { classNames: { leftBtn, rightBtn } } = this.config;
-        const { image } = this.config.card.classNames;
+        const { image, cardIdxBtn } = this.config.card.classNames;
         switch (classList[0]) {
             case leftBtn:
                 this.moveLeftHandler(classList[0]);
@@ -35,19 +35,33 @@ class CardCarouselController {
             case image:
                 this.cardHandler(e.target);
                 break;
+            case cardIdxBtn:
+                this.indexBtnHandler(e.target);
+                break;
             default:
-                console.log(classList[0]);
+                console.log(e.target);
         }
     }
 
+    indexBtnHandler(target) {
+        console.log(target);
+        console.log(target.getAttribute("idx"));
+    }
+
     cardHandler(target) {
-        const { wrapper, selectedCard, btnsWrapper } = this.config.card.classNames;
+        const { wrapper, selectedCard, btnsWrapper, selectedIdxBtn } = this.config.card.classNames;
         for (const element of document.querySelectorAll(`.${wrapper}`)) {
+            const btnsWrapperOfElement = element.querySelector(`.${btnsWrapper}`);
             element.classList.remove(selectedCard);
-            element.querySelector(`.${btnsWrapper}`).style.display = "none";
+            btnsWrapperOfElement.style.display = "none";
+            for (const child of btnsWrapperOfElement.children) {
+                child.classList.remove(selectedIdxBtn);
+            }
         }
-        const { classList } = target.parentNode;
-        target.parentNode.querySelector(`.${btnsWrapper}`).style.display = "flex";
+        const { parentNode, parentNode: { classList } } = target;
+        const btnsWrapperElement = parentNode.querySelector(`.${btnsWrapper}`);
+        btnsWrapperElement.style.display = "flex";
+        btnsWrapperElement.firstElementChild.classList.add(selectedIdxBtn);
         classList.add(selectedCard);
     }
 
