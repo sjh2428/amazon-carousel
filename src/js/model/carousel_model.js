@@ -1,5 +1,5 @@
 /**
- * model class for mini carousel
+ * model class for carousel
  */
 class CarouselModel {
     constructor(data) {

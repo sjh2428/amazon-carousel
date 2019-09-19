@@ -1,13 +1,13 @@
 import toPx from "to-px";
 
 /**
- * controller for mini carousel
+ * controller for carousel
  */
-class MiniCarouselController {
+class CarouselController {
     /**
      * set interval for auto sliding and save view class to this.view object
      *
-     * @param {Class} view view class for mini carousel
+     * @param {Class} view view class for carousel
      * @param {Object} config config obj for carousel
      */
     constructor(view, config) {
@@ -102,4 +102,4 @@ class MiniCarouselController {
     }
 }
 
-export default MiniCarouselController
+export default CarouselController

@@ -1,5 +1,5 @@
 /**
- * view class for mini carousel
+ * view class for carousel
  */
 class CarouselView {
     /**
