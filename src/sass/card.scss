@@ -4,7 +4,6 @@ $card-wrapper: ".card-wrapper";
 $card-image: ".card-image";
 $card-title: ".card-title";
 $card-btns-wrapper: ".card-btns-wrapper";
-$card-index-btn: ".card-index-btn";
 $card-main-width: 60rem;
 $card-width: 9rem;
 $card-height: 12rem;
@@ -65,8 +64,4 @@ $card-height: 12rem;
         border-radius: 8px;
         cursor: pointer;
     }
-}
-
-#{$card-index-btn} {
-
 }

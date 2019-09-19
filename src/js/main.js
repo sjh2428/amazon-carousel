@@ -18,3 +18,10 @@ const MiniCarouselInit = () => {
 
 MiniCarouselInit();
 
+const mainCarouselInit = () => {
+    const Model = new CarouselModel(mainCarouselData);
+    const View = new CarouselView(Model, mainCarouselConfig);
+    const Controller = new CarouselController(View, mainCarouselConfig);
+}
+
+mainCarouselInit();

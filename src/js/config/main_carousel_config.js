@@ -1,27 +1,39 @@
 const mainCarouselConfig = {
+    card: {
+        mainWidth: "60rem",
+        width: "9rem",
+        height: "12rem",
+        classNames: {
+            container: "card-container",
+            wrapper: "card-wrapper",
+            image: "card-image",
+            title: "card-title",
+            btnsWrapper: "card-btns-wrapper"
+        }
+    },
     width: "16rem",
     height: "12rem",
     animationDuration: 500, // ms unit
     intervalTime: 3000, // ms unit
     classNames: {
         main: "card-carousel-main",
-        wrapper: "crs-wrap",
-        viewportWrap: "crs-viewport-wrap",
-        viewport: "viewport-crs",
-        shadow: "crs-shadow",
-        shadowLeft: "shadow-left",
-        shadowRight: "shadow-right",
-        leftBtn: "crs-move-left-btn",
-        rightBtn: "crs-move-right-btn",
-        moveBtn: "crs-move-btn",
-        ul: "crs-item-ul",
-        li: "crs-item-wrap-li",
-        benefitWrap: "benefit-wrap",
-        benefitHeader: "benefit-header",
-        benefitContent: "benefit-content",
-        benefitFooter: "benefit-footer"
+        wrapper: "card-crs-wrap",
+        viewportWrap: "card-crs-viewport-wrap",
+        viewport: "card-viewport-crs",
+        shadow: "card-crs-shadow",
+        shadowLeft: "card-shadow-left",
+        shadowRight: "card-shadow-right",
+        leftBtn: "card-crs-move-left-btn",
+        rightBtn: "card-crs-move-right-btn",
+        moveBtn: "card-crs-move-btn",
+        ul: "card-crs-item-ul",
+        li: "card-crs-item-wrap-li",
+        benefitWrap: "card-benefit-wrap",
+        benefitHeader: "card-benefit-header",
+        benefitContent: "card-benefit-content",
+        benefitFooter: "card-benefit-footer"
     },
-    footerLink: "https://www.amazon.com/gp/video/storefront/ref=dvm_us_aq_np_dhb_be_optorigt1?ie=UTF8&merchId=originals1"
+    footerLink: ""
 };
 
 export default mainCarouselConfig
