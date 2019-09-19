@@ -66,9 +66,8 @@ class MiniCarouselController {
             crsUl.prepend(crsLastLi);
             crsUl.style.transition = "none";
             crsUl.style.transform = "none";
-            crsUl.removeEventListener("transitionend", restore);
         };
-        crsUl.addEventListener("transitionend", restore);
+        crsUl.addEventListener("transitionend", restore, { once: true });
     }
 
     /**
@@ -82,9 +81,8 @@ class MiniCarouselController {
             crsUl.appendChild(crs1stLi);
             crsUl.style.transition = "none";
             crsUl.style.transform = "none";
-            crsUl.removeEventListener("transitionend", restore);
         };
-        crsUl.addEventListener("transitionend", restore);
+        crsUl.addEventListener("transitionend", restore, { once: true });
     }
 
     /**
