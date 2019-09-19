@@ -7,7 +7,8 @@ class MiniCarouselController {
     /**
      * set interval for auto sliding and save view class to this.view object
      *
-     * @param {Class} view view for mini carousel
+     * @param {Class} view view class for mini carousel
+     * @param {Object} config config obj for carousel
      */
     constructor(view, config) {
         this.view = view;

@@ -4,7 +4,8 @@
 class CarouselView {
     /**
      * 
-     * @param model 
+     * @param {Class} model model class for carousel
+     * @param {Object} config config obj for carousel
      */
     constructor(model, config) {
         this.model = model;
