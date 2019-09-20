@@ -44,8 +44,24 @@ class CardCarouselController {
     }
 
     indexBtnHandler(target) {
-        console.log(target);
-        console.log(target.getAttribute("idx"));
+        const crsItems = document.querySelectorAll(".card-crs-item-wrap-li");
+        const seeingCarouselIdx = Math.floor(crsItems.length / 2);
+        const nowSeeingIdx = crsItems[seeingCarouselIdx].getAttribute("posidx");
+        const clickedIdx = target.getAttribute("idx");
+        console.log("now seeing index", nowSeeingIdx);
+        console.log("clicked index", clickedIdx);
+        this.switchSelectedIdxBtn(target);
+    }
+
+    switchSelectedIdxBtn(target) {
+        const { selectedIdxBtn } = this.config.card.classNames;
+        target.parentNode.querySelectorAll("*").forEach(element => {
+            const { classList } = element
+            if (classList.contains(selectedIdxBtn)) {
+                classList.remove(selectedIdxBtn);
+            }
+        });
+        target.classList.add(selectedIdxBtn);
     }
 
     cardHandler(target) {
