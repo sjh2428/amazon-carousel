@@ -26,8 +26,13 @@ class CardCarouselView {
             container: cardContainer, wrapper: cardWrapper, image: cardImage, 
             title: cardTitle, btnsWrapper: cardBtnsWrapper, cardIdxBtn
         } = this.config.card.classNames;
-        
-        let idx = 0;
+
+        let crsItemsLen = 0;
+        Object.keys(carousel).forEach(key => {
+            crsItemsLen += carousel[key].length;
+        });
+        const centerIdx = Math.floor(crsItemsLen / 2);
+        let idx = centerIdx;
         let html = /*html*/`
         <div class="${cardContainer}">`
         Object.keys(card).forEach(key => {
@@ -39,7 +44,7 @@ class CardCarouselView {
                 <div class="${cardBtnsWrapper}">`
                 carousel[key].forEach(_ => {
                     html += /*html*/`
-                    <div class="${cardIdxBtn}" idx=${idx++}></div>`;
+                    <div class="${cardIdxBtn}" idx=${(idx++) % crsItemsLen}></div>`;
                 });
             html += /*html*/`
                 </div>
@@ -53,12 +58,14 @@ class CardCarouselView {
                     <div class="${leftBtn} ${moveBtn}"></div>
                     <div class="${viewport}">
                         <ul class="${ul}">`;
-        idx = 0;
+        
+        console.log(centerIdx);
+        idx = centerIdx;
         Object.keys(carousel).forEach(key => {
             for (const categoryData of carousel[key]) {
                 const { image, title, head, body, tail, link } = categoryData;
                 html += /*html*/`
-                    <li class="${li}" posidx=${idx++}>
+                    <li class="${li}" posidx=${(idx++) % crsItemsLen}>
                         <div class="${contentWrap}" style="background-image: url('${image}')">
                             <div class="${contentContainer}">
                                 <div class="${contentCategory}">${title}</div>
