@@ -1,6 +1,6 @@
 const mainCarouselConfig = {
     card: {
-        mainWidth: "60rem",
+        mainWidth: "60rem" ,
         width: "9rem",
         height: "12rem",
         classNames: {

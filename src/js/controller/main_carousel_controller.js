@@ -81,33 +81,37 @@ class CardCarouselController {
         
         const children = crsUl.children;
         for(let i = 0; i < children.length; i++) {
-            if (children[i].getAttribute("posidx") == clickedIdx) {
+            if (children[i].getAttribute("posidx") === clickedIdx) {
                 if (i < centerCarouselIdx) {
                     console.log("왼쪽으로", centerCarouselIdx - i, "만큼 가야함");
                     this.moveCustom(crsUl, true, `${Number(width.slice(0, -3)) * (centerCarouselIdx - i)}rem`);
                     const restore = () => {
+                        const crsLastLi = [];
                         for(let j = 0; j < centerCarouselIdx - i; j++) {
-                            const crsLastLi = crsItems[crsItems.length - 1];
-                            crsUl.prepend(crsLastLi);
+                            crsLastLi.push(crsItems[crsItems.length - (j + 1)]);
                         }
+                        crsLastLi.forEach(li => {
+                            crsUl.prepend(li);
+                        });
                         crsUl.style.transition = "none";
                         crsUl.style.transform = "none";
                     };
-                    console.log(`${Number(width.slice(0, -3)) * (centerCarouselIdx - i)}rem`);
                     crsUl.addEventListener("transitionend", restore, { once: true });
                     break;
                 } else if (i > centerCarouselIdx) {
                     console.log("오른쪽", i - centerCarouselIdx, "만큼 가야남");
                     this.moveCustom(crsUl, false, `${Number(width.slice(0, -3)) * (i - centerCarouselIdx)}rem`);
                     const restore = () => {
+                        const crs1stLi = [];
                         for(let j = 0; j < i - centerCarouselIdx; j++) {
-                            const crs1stLi = crsUl.querySelector(`.${li}`);
-                            crsUl.appendChild(crs1stLi);
+                            crs1stLi.push(crsItems[j]);
                         }
+                        crs1stLi.forEach(li => {
+                            crsUl.appendChild(li);
+                        });
                         crsUl.style.transition = "none";
                         crsUl.style.transform = "none";
                     };
-                    console.log(`${Number(width.slice(0, -3)) * (i - centerCarouselIdx)}rem`);
                     crsUl.addEventListener("transitionend", restore, { once: true });
                     break;
                 } else {

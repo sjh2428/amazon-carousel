@@ -58,8 +58,6 @@ class CardCarouselView {
                     <div class="${leftBtn} ${moveBtn}"></div>
                     <div class="${viewport}">
                         <ul class="${ul}">`;
-        
-        console.log(centerIdx);
         idx = centerIdx;
         Object.keys(carousel).forEach(key => {
             for (const categoryData of carousel[key]) {
