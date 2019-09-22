@@ -20,10 +20,10 @@ class CardCarouselController {
         this.view.render();
         this.view.mainDOM.addEventListener("click", (e) => this.handleEvent(e));
         this.scrollPositionSetting();
-        this.liOrderSetting();
+        this.liOrderPreSetting();
     }
 
-    liOrderSetting() {
+    liOrderPreSetting() {
         const { ul, li } = this.config.classNames;
         const loop = Math.floor(
             document.querySelectorAll(
@@ -45,8 +45,9 @@ class CardCarouselController {
 
     handleEvent(e) {
         const { classList } = e.target;
-        const { classNames: { leftBtn, rightBtn } } = this.config;
-        const { image, cardIdxBtn } = this.config.card.classNames;
+        const { classNames: { leftBtn, rightBtn }, 
+                card: { 
+                    classNames: { image, cardIdxBtn } } } = this.config;
         switch (classList[0]) {
             case leftBtn:
                 this.moveLeftHandler(classList[0]);
@@ -65,61 +66,63 @@ class CardCarouselController {
         }
     }
 
+    findMatchingPositionIndex(f, iter) {
+        let index = 0;
+        for (const a of iter) {
+            if (f(a)) return index;
+            index++;
+        }
+        return undefined;
+    }
+
     indexBtnHandler(target) {
-        const { width } = this.config;
-        const { ul, li } = this.config.classNames;
+        const { width, classNames: { ul, li } } = this.config;
         const crsUl = document.querySelector(`.${ul}`);
         const crsItems = document.querySelectorAll(`.${li}`);
         const centerCarouselIdx = Math.floor(crsItems.length / 2);
-        const nowSeeingIdx = crsItems[centerCarouselIdx].getAttribute("posidx");
         const clickedIdx = target.getAttribute("idx");
-        console.log("now seeing index", nowSeeingIdx);
-        console.log("clicked index", clickedIdx);
+        const index = this.findMatchingPositionIndex(a => a.getAttribute("posidx") === clickedIdx, crsUl.children);
         this.switchSelectedIdxBtn(target);
-        console.log("end of left carousel index :", crsItems[0].getAttribute("posidx"));
-        console.log("end of right carousel index :",crsItems[crsItems.length - 1].getAttribute("posidx"));
-        
-        const children = crsUl.children;
-        for(let i = 0; i < children.length; i++) {
-            if (children[i].getAttribute("posidx") === clickedIdx) {
-                if (i < centerCarouselIdx) {
-                    console.log("왼쪽으로", centerCarouselIdx - i, "만큼 가야함");
-                    this.moveCustom(crsUl, true, `${Number(width.slice(0, -3)) * (centerCarouselIdx - i)}rem`);
-                    const restore = () => {
-                        const crsLastLi = [];
-                        for(let j = 0; j < centerCarouselIdx - i; j++) {
-                            crsLastLi.push(crsItems[crsItems.length - (j + 1)]);
-                        }
-                        crsLastLi.forEach(li => {
-                            crsUl.prepend(li);
-                        });
-                        crsUl.style.transition = "none";
-                        crsUl.style.transform = "none";
-                    };
-                    crsUl.addEventListener("transitionend", restore, { once: true });
-                    break;
-                } else if (i > centerCarouselIdx) {
-                    console.log("오른쪽", i - centerCarouselIdx, "만큼 가야남");
-                    this.moveCustom(crsUl, false, `${Number(width.slice(0, -3)) * (i - centerCarouselIdx)}rem`);
-                    const restore = () => {
-                        const crs1stLi = [];
-                        for(let j = 0; j < i - centerCarouselIdx; j++) {
-                            crs1stLi.push(crsItems[j]);
-                        }
-                        crs1stLi.forEach(li => {
-                            crsUl.appendChild(li);
-                        });
-                        crsUl.style.transition = "none";
-                        crsUl.style.transform = "none";
-                    };
-                    crsUl.addEventListener("transitionend", restore, { once: true });
-                    break;
-                } else {
-                    console.log("제자리");
-                    break;
-                }
-            }
+        if (index < centerCarouselIdx) {
+            this.move(crsUl,
+                this.direction.LEFT,
+                `${Number(width.slice(0, -3)) * (centerCarouselIdx - index)}rem`);
+            const liList = 
+                this.getToPushList((i) => i < centerCarouselIdx - index, crsItems, this.direction.LEFT);
+            crsUl.addEventListener("transitionend", 
+            e => this.restore(crsUl, liList, this.direction.LEFT),
+            { once: true });
+        } else if (index > centerCarouselIdx) {
+            this.move(crsUl, 
+                this.direction.RIGHT,
+                `${Number(width.slice(0, -3)) * (index - centerCarouselIdx)}rem`);
+            const liList = 
+                this.getToPushList((i) => i < index - centerCarouselIdx, crsItems, this.direction.RIGHT);
+            crsUl.addEventListener("transitionend", 
+            e => this.restore(crsUl, liList, this.direction.RIGHT),
+            { once: true });
         }
+    }
+
+    getToPushList(condition, items, direction) {
+        const list = [];
+        for(let i = 0; condition(i); i++) list.push(this.getItem(direction, i, items));
+        return list;
+    }
+
+    getItem(direction, index, items) {
+        return direction ? items[items.length - (index + 1)] : items[index];
+    }
+
+    moveLiTag(ulTag, liTagList, direction) {
+        if (direction) for(const liTag of liTagList) ulTag.prepend(liTag);
+        else for(const liTag of liTagList) ulTag.appendChild(liTag);
+    }
+
+    restore(ul, liTagsList, direction) {
+        this.moveLiTag(ul, liTagsList, direction);
+        ul.style.transition = "none";
+        ul.style.transform = "none";
     }
 
     switchSelectedIdxBtn(target) {
@@ -147,6 +150,7 @@ class CardCarouselController {
         const btnsWrapperElement = parentNode.querySelector(`.${btnsWrapper}`);
         btnsWrapperElement.style.display = "flex";
         btnsWrapperElement.firstElementChild.classList.add(selectedIdxBtn);
+        this.indexBtnHandler(btnsWrapperElement.firstElementChild)
         classList.add(selectedCard);
     }
 
@@ -188,14 +192,9 @@ class CardCarouselController {
      *
      * @param {Element} ul carousel ul element
      * @param {Boolean} direction true - left, false - right
+     * @param {String} moveLength width to move
      */
-    move(ul, direction) {
-        const { animationDuration, width } = this.config;
-        ul.style.transition = `all ${animationDuration}ms`;
-        ul.style.transform = direction ? `translateX(${width})` : `translateX(-${width})`;
-    }
-
-    moveCustom(ul, direction, moveLength) {
+    move(ul, direction, moveLength = this.config.width) {
         const { animationDuration } = this.config;
         ul.style.transition = `all ${animationDuration}ms`;
         ul.style.transform = direction ? `translateX(${moveLength})` : `translateX(-${moveLength})`;
