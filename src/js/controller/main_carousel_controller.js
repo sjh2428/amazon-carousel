@@ -50,10 +50,10 @@ class CardCarouselController {
                     classNames: { image, cardIdxBtn } } } = this.config;
         switch (classList[0]) {
             case leftBtn:
-                this.moveLeftHandler(classList[0]);
+                this.arrowBtnHandler(this.direction.LEFT);
                 break;
             case rightBtn:
-                this.moveRightHandler(classList[0]);
+                this.arrowBtnHandler(this.direction.RIGHT);
                 break;
             case image:
                 this.cardHandler(e.target);
@@ -104,6 +104,8 @@ class CardCarouselController {
         }
     }
 
+
+
     getToPushList(condition, items, direction) {
         const list = [];
         for(let i = 0; condition(i); i++) list.push(this.getItem(direction, i, items));
@@ -115,6 +117,9 @@ class CardCarouselController {
     }
 
     moveLiTag(ulTag, liTagList, direction) {
+        if (!Array.isArray(liTagList)) {
+            liTagList = [liTagList];
+        }
         if (direction) for(const liTag of liTagList) ulTag.prepend(liTag);
         else for(const liTag of liTagList) ulTag.appendChild(liTag);
     }
@@ -137,54 +142,51 @@ class CardCarouselController {
     }
 
     cardHandler(target) {
-        const { wrapper, selectedCard, btnsWrapper, selectedIdxBtn } = this.config.card.classNames;
-        for (const element of document.querySelectorAll(`.${wrapper}`)) {
-            const btnsWrapperOfElement = element.querySelector(`.${btnsWrapper}`);
-            element.classList.remove(selectedCard);
-            btnsWrapperOfElement.style.display = "none";
-            for (const child of btnsWrapperOfElement.children) {
-                child.classList.remove(selectedIdxBtn);
-            }
-        }
+        this.cardInit();
+        const { selectedCard, btnsWrapper, selectedIdxBtn } = this.config.card.classNames;
         const { parentNode, parentNode: { classList } } = target;
         const btnsWrapperElement = parentNode.querySelector(`.${btnsWrapper}`);
         btnsWrapperElement.style.display = "flex";
         btnsWrapperElement.firstElementChild.classList.add(selectedIdxBtn);
-        this.indexBtnHandler(btnsWrapperElement.firstElementChild)
         classList.add(selectedCard);
+        this.indexBtnHandler(btnsWrapperElement.firstElementChild);
     }
 
-    /**
-     * after move left, restore to origin position
-     */
-    moveLeftHandler() {
+    cardInit() {
+        const { wrapper, selectedCard, btnsWrapper } = this.config.card.classNames;
+        for (const element of document.querySelectorAll(`.${wrapper}`)) {
+            const btnsWrapperOfElement = element.querySelector(`.${btnsWrapper}`);
+            element.classList.remove(selectedCard);
+            this.cardIdxBtnInit(btnsWrapperOfElement);
+        }
+    }
+
+    cardIdxBtnInit(btnsWrapper) {
+        const { selectedIdxBtn } = this.config.card.classNames;
+        btnsWrapper.style.display = "none";
+        for (const child of btnsWrapper.children) {
+            child.classList.remove(selectedIdxBtn);
+        }
+    }
+
+    arrowBtnHandler(direction) {
         const { ul, li } = this.config.classNames;
         const crsUl = document.querySelector(`.${ul}`);
         const crsLis = crsUl.querySelectorAll(`.${li}`);
-        const crsLastLi = crsLis[crsLis.length - 1];
-        this.move(crsUl, this.direction.LEFT);
-        const restore = () => {
-            crsUl.prepend(crsLastLi);
-            crsUl.style.transition = "none";
-            crsUl.style.transform = "none";
-        };
-        crsUl.addEventListener("transitionend", restore, { once: true });
+        const crsLi = direction ? crsLis[crsLis.length - 1] : crsLis[0];
+        this.move(crsUl, direction);
+        crsUl.addEventListener("transitionend", e => this.restore(crsUl, crsLi, direction), { once: true });
+        const nextLi = direction ? crsLis[Math.floor(crsLis.length / 2) - 1] : crsLis[Math.floor(crsLis.length / 2) + 1];
+        this.cardUpdate(nextLi);
     }
 
-    /**
-     * after move right, restore to origin position
-     */
-    moveRightHandler() {
-        const { ul, li } = this.config.classNames;
-        const crsUl = document.querySelector(`.${ul}`);
-        const crs1stLi = crsUl.querySelector(`.${li}`);
-        this.move(crsUl, this.direction.RIGHT);
-        const restore = () => {
-            crsUl.appendChild(crs1stLi);
-            crsUl.style.transition = "none";
-            crsUl.style.transform = "none";
-        };
-        crsUl.addEventListener("transitionend", restore, { once: true });
+    cardUpdate(nextLi) {
+        const { selectedCard, selectedIdxBtn, cardIdxBtn } = this.config.card.classNames;
+        const btn = document.querySelector(`.${cardIdxBtn}[idx='${nextLi.getAttribute("posidx")}']`);
+        this.cardInit();
+        btn.parentElement.parentElement.classList.add(`${selectedCard}`);
+        btn.parentElement.style.display = "flex";
+        btn.classList.add(selectedIdxBtn);
     }
 
     /**

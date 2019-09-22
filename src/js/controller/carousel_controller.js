@@ -19,7 +19,6 @@ class CarouselController {
             RIGHT: false
         }
         this.view.render();
-        console.log(view.mainDOM);
         this.view.mainDOM.addEventListener("click", (e) => this.handleEvent(e.target.classList[0]));
         this.scrollSetting();
         this.interval = setInterval(() => this.moveRightHandler(), intervalTime);
