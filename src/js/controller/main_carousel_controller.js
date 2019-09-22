@@ -56,7 +56,7 @@ class CardCarouselController {
                 this.arrowBtnHandler(this.direction.RIGHT);
                 break;
             case image:
-                this.cardHandler(e.target);
+                this.cardSwitchHandler(e.target);
                 break;
             case cardIdxBtn:
                 this.indexBtnHandler(e.target);
@@ -141,7 +141,7 @@ class CardCarouselController {
         target.classList.add(selectedIdxBtn);
     }
 
-    cardHandler(target) {
+    cardSwitchHandler(target) {
         this.cardInit();
         const { selectedCard, btnsWrapper, selectedIdxBtn } = this.config.card.classNames;
         const { parentNode, parentNode: { classList } } = target;
