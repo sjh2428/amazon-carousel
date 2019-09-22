@@ -21,6 +21,7 @@ class CardCarouselController {
         this.view.mainDOM.addEventListener("click", (e) => this.handleEvent(e));
         this.scrollPositionSetting();
         this.liOrderPreSetting();
+        this.cardInitSetting();
     }
 
     liOrderPreSetting() {
@@ -41,6 +42,11 @@ class CardCarouselController {
             = Math.floor(
                 document.querySelectorAll(
                     `.${li}`).length / 2) * toPx(width);
+    }
+
+    cardInitSetting() {
+        const crsLi = document.querySelectorAll(`.card-crs-item-wrap-li`);
+        this.cardUpdate(crsLi[Math.floor(crsLi.length / 2)]);
     }
 
     handleEvent(e) {
@@ -103,8 +109,6 @@ class CardCarouselController {
             { once: true });
         }
     }
-
-
 
     getToPushList(condition, items, direction) {
         const list = [];
