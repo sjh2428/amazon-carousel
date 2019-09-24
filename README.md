@@ -126,6 +126,30 @@
 
     처음 login페이지에 접속할 때 또는 서버 처음 실행할 때 table 생성 및 데이터 입력을 해주어야 함
 
+**`user`**
+
+| Field    | Type        | Options     |
+|---------------|-------------|-------------|
+| user_id       | varchar(20) | PRIMARY KEY |
+| user_password | varchar(16) |             |
+| name          | varchar(20) |             |
+| birth         | date        |             |
+| admin         | boolean     | DEFAULT 0   |
+**`item`**
+
+| Field | Type         | Options                               |
+|------------|--------------|---------------------------------------|
+| id            | varchar(50)    | PRIMARY KEY                   |
+| category   | varchar(20)  |                                       |
+| image_name | varchar(255) |                                       |
+| title      | varchar(50)  |                                       |
+| head       | varchar(100) |                                       |
+| body       | TEXT         |                                       |
+| tail       | varchar(50)  |                                       |
+| link       | varchar(255) |                                       |
+| created_by | varchar(20)  | FOREIGN KEY REFERENCES user (user_id) |
+
+
 #### 정적 파일 관리
 
 ---
