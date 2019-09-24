@@ -74,7 +74,7 @@
         - 마지막 캐로셀로 이동되는데 왼쪽으로 한칸 이동되며 마지막 캐로셀에 해당하는 카테고리의 카드가 확대되고 원형 버튼이 나타남
         - 마지막 원형 버튼만 밝은 색으로 활성화
 
-## 4주차
+## 4주차 amazon-carousel back-end
 ### 기능 및 구현 요구사항
 
 #### 관리자 페이지 기능 요구사항
@@ -107,11 +107,9 @@
 ---
 
 - Express 사용
-- 관리자 페이지 로그인에는 `passport-local` 사용
+- 관리자 페이지 로그인에는 [`passport-local`](http://www.passportjs.org/packages/passport-local/) 사용
 
         $ npm install passport passport-local
-
-    [passport-local](http://www.passportjs.org/packages/passport-local/)
 
 - 관리자 전용 로그인, 관리자 전용 페이지를 만들어야 함
 - admin인지 확인하는 middleware 함수를 구현해야 함
@@ -120,11 +118,9 @@
 
 ---
 
-- `mysql2` npm package 사용하여 구현
+- [`mysql2`](https://www.npmjs.com/package/mysql2) npm package 사용하여 구현
 
         $ npm install --save mysql2
-
-    [mysql2](https://www.npmjs.com/package/mysql2)
 
 - 초기 데이터 입력 스크립트를 구현하고 개발 환경에서 자동으로 실행하도록 함
 
