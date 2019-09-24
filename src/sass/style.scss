@@ -5,4 +5,7 @@ $body-color: #EFEFEF;
 
 body {
     background-color: $body-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
