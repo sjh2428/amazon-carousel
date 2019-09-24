@@ -45,7 +45,7 @@ module.exports = {
             }
         ]
     },
-    devtool: "source-map",
+    devtool: "inline-source-map",
     // https://webpack.js.org/configuration/mode/
     mode: "development"
 };

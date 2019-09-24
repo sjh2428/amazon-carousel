@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    link(rel="stylesheet", href="/css/login.css")
+    <div class="ui middle aligned center aligned grid">
+        <div class="column" style="width: 500px;">
+            <form class="ui large form" method="post" action="/login">
+                <div class="ui stacked segment">
+                    <div class="field">
+                    <div class="ui input">
+                        <input type="text" name="email" placeholder="E-mail address">
+                    </div>
+                    </div>
+                    <div class="field">
+                    <div class="ui input">
+                        <input type="password" name="password" placeholder="Password">
+                    </div>
+                    </div>
+                    <input type="submit" class="ui fluid large teal submit button" value="Login">
+                </div>
+                <div class="ui error message"></div>
+            </form>
+            <div class="ui message">
+                |New to us? <a href="#">Sign Up</a>
+            </div>
+        </div>
+    </div>
