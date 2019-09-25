@@ -1,7 +1,7 @@
 extends admin_layout
 
 block content
-    <table class="ui celled table">
+    <table class="ui celled table" style="margin: 0;">
         <thead>
             <tr>
                 <th>User ID</th>
@@ -11,15 +11,27 @@ block content
             </tr>
         </thead>
         <tbody>
-            if usersData
+            if userData
                 each user in userData
                     <tr>
                         <td data-label="User ID">#{user.user_id}</td>
                         <td data-label="User Name">#{user.name}</td>
                         <td data-label="User Birth">#{user.birth}</td>
                         <td data-label="User Auth Manage">
-                            <a class="ui primary basic button">To Administrator</a>
-                            <a class="ui secondary basic button">To User</a>
+                            if user.admin
+                                <a class="ui primary basic small button user-control-btn disabled">
+                                    |To Administrator
+                                </a>
+                                <a class="ui secondary basic small button user-control-btn">
+                                    |To User
+                                </a>
+                            else
+                                <a class="ui primary basic small button user-control-btn">
+                                    |To Administrator
+                                </a>
+                                <a class="ui secondary basic small button user-control-btn disabled">
+                                    |To User
+                                </a>
                         </td>
                     </tr>
         </tbody>
