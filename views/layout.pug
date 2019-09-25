@@ -4,6 +4,15 @@ html
         link(rel="stylesheet", href="/semantic/semantic.min.css")
         title Amazon
     body
+        if user
+            span(style="position: absolute; top: 2rem; right: 2rem;")
+                |#{user.user_id}님 환영합니다.  |  
+                a(href="/logout") Log out
+        else
+            span(style="position: absolute; top: 2rem; right: 2rem;")
+                a(href="/login") Login
+                |  | 
+                a(href="/") Sign Up
         block content
     script(src="https://code.jquery.com/jquery-3.1.1.min.js", 
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=",
