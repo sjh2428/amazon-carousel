@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { onlyAdmin } = require("../auth");
 const adminController = require("../controllers/admin_controller");
+const multer = require("multer");
+const upload = multer({ storage: multer.memoryStorage() });
 
 router.get("/", onlyAdmin, (req, res) => {
     res.render("admin/admin", { user: req.user });
@@ -20,11 +22,12 @@ router.get("/dealUser/:id", onlyAdmin, async(req, res) => {
 });
 
 router.get("/item/upload", onlyAdmin, (req, res) => {
-
+    res.render("admin/items", { user: req.user });
 });
 
-router.post("/item/upload", onlyAdmin, (req, res) => {
-
+router.post("/item/upload", onlyAdmin, upload.single("img"), async(req, res) => {
+    await adminController.uploadAndInsertDB(req);
+    res.redirect("/admin");
 });
 
 module.exports = router;

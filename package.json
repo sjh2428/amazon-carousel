@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.348.0",
+    "buffer-to-stream": "^1.0.0",
     "connect-flash": "^0.1.1",
     "connect-redis": "^4.0.2",
     "cookie-parser": "~1.4.4",
@@ -24,7 +25,8 @@
     "passport-local": "^1.0.0",
     "pug": "^2.0.4",
     "redis": "^2.8.0",
-    "to-px": "^1.1.0"
+    "to-px": "^1.1.0",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.0",

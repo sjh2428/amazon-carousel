@@ -1,5 +1,32 @@
 extends admin_layout
 
 block content
-
+    .main-sign-up(style="")
+        .ui.form.signup-form-wrapper
+            form(action="/admin/item/upload", method="post" enctype="multipart/form-data")
+                .field
+                    label(for="Category") Category
+                    input(type="text", name="Category" placeholder="Category")
+                .field
+                    label(for="Title") Title
+                    input(type="text", name="Title" placeholder="Title")
+                .field
+                    label(for="Head") Head
+                    input(type="text", name="Head" placeholder="Head")
+                .field
+                    label(for="Body") Body
+                    input(type="text", name="Body" placeholder="Body")
+                .field
+                    label(for="Tail") Tail
+                    input(type="text", name="Tail" placeholder="Tail")
+                .field
+                    label(for="Link") Link
+                    input(type="text", name="Link" placeholder="Link")
+                .field
+                    label(for="img") Image
+                    input(type="file", name="img", accept="image/png, image/jpeg, image/gif")
+                .field
+                    input.ui.button(type="submit", value="Upload")
+                    input.ui.button(type="reset", value="Reset")
+    script(src="/javascripts/signup.bundle.js")
     script(src="/javascripts/admin.bundle.js")

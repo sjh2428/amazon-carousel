@@ -2,7 +2,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const AWS = require('aws-sdk');
-const fs = require('fs');
+const toStream = require('buffer-to-stream');
 const endpoint = new AWS.Endpoint('https://kr.object.ncloudstorage.com');
 const region = 'kr-standard';
 const access_key = process.env.ACCESS_KEY;
@@ -23,16 +23,18 @@ const options = {
 };
 
 /**
- * upload file within 5mb to ncloud with relative path
+ * upload file within 5mb to ncloud
  * 
- * @param {String} local_file_name must input with Relative path
+ * @param {String} fileName
+ * @param {Buffer} imgBuffer image buffer
  */
-const upload2ncloud = async (local_file_name) => {
+const upload2ncloud = async (fileName, imgBuffer) => {
+    const readable = toStream(Buffer.from(imgBuffer))
     await S3.upload({
         Bucket: process.env.BUCKET_NAME,
-        Key: local_file_name,
+        Key: fileName,
         ACL: "public-read",
-        Body: fs.createReadStream(local_file_name)
+        Body: readable
     }, options).promise();
 }
 

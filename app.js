@@ -41,7 +41,7 @@ app.use(session({
     secret: "secret",
     resave: false, // 요청 때 세션이 수정된게 없으면 강제로 세션 저장
     saveUninitialized: false, // 저장된게 없으면 세션 저장
-    cookie: { maxAge: 1000 * 60 } // cookie의 expire time을 connect-redis가 세션의 expire time으로 지정해줌
+    cookie: { maxAge: 1000 * 60 * 5 } // cookie의 expire time을 connect-redis가 세션의 expire time으로 지정해줌
 }));
 app.use(passport.initialize());
 app.use(passport.session());
