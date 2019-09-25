@@ -7,9 +7,6 @@ html
         if user
             span(style="position: absolute; top: 2rem; right: 2rem;")
                 |#{user.user_id}님 환영합니다.  |  
-                if user.admin
-                    a(href="/admin") Admin Page
-                |   |   
                 a(href="/logout") Log out
         else
             span(style="position: absolute; top: 2rem; right: 2rem;")

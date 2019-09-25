@@ -12,7 +12,8 @@ const passport = require("passport");
 const flash = require("connect-flash");
 
 const indexRouter = require("./routes/index");
-const apiRouter = require("./routes/api_router");
+const apiRouter = require("./routes/api");
+const adminRouter = require("./routes/admin");
 const passportSetting = require("./passport");
 
 const app = express();
@@ -53,6 +54,7 @@ redisClient.on("error", (err) => console.log(err));
 
 app.use("/", indexRouter);
 app.use("/api", apiRouter);
+app.use("/admin", adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,22 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-menu {
+    margin: 0;
+}
+
+.admin-wrapper {
+    width: 60rem;
+    height: 40rem;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+.admin-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
