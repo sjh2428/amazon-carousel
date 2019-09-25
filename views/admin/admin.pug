@@ -1,20 +1,7 @@
 extends admin_layout
 
 block content
-    <div class="admin-wrapper">
-        <div class="ui vertical pointing menu admin-menu" style="margin: 0;">
-            <a class="item active">
-                |Home
-            </a>
-            <a class="item">
-                |Users
-            </a>
-            <a class="item">
-                |Items
-            </a>
-        </div>
-        <div class="admin-content">
-            |#{user.name}님, 관리자 페이지에 들어오셨습니다.
-        </div>
+    <div class="admin-content">
+        |#{user.name}님, 관리자 페이지에 들어오셨습니다.
     </div>
     script(src="/javascripts/admin.bundle.js")
