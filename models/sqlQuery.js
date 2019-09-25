@@ -12,15 +12,15 @@ const pool = mysql.createPool({
 const query = async (sql) => {
 	try {
 		const connection = await pool.getConnection(async conn => conn);
-		try {
-			const [rows] = await connection.query(sql);
-			return rows;
-		} catch(err) {
-			console.log('Query Error');
-			return false;
-		}
+		await connection.beginTransaction()
+		const [rows] = await connection.query(sql);
+		await connection.commit();
+		connection.release();
+		return rows;
 	} catch(err) {
 		console.log('DB Error');
+		await connection.rollback();
+		connection.release();
 		return false;
 	}
 };
