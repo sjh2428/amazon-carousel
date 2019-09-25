@@ -2,11 +2,14 @@ const path = require("path");
 
 module.exports = {
     // entry file
-    entry: "./src/js/main.js",
+    entry: {
+        main: "./src/js/main.js",
+        signup: "./src/js/signup.js"
+    },
     // compile + bundling된 js파일이 저장될 경로와 이름 지정
     output: {
         path: path.resolve(__dirname, "public/javascripts"),
-        filename: "bundle.js"
+        filename: "[name].bundle.js"
     },
     module: {
         rules: [

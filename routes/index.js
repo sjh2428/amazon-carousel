@@ -28,4 +28,8 @@ router.get("/logout", (req, res) => {
     })
 });
 
+router.get("/sign-up", (req, res) => {
+    res.render("sign-up");
+});
+
 module.exports = router;
