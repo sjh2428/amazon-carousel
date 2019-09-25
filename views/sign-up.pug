@@ -5,21 +5,25 @@ block content
         .ui.form.signup-form-wrapper
             form(action="/sign-up", method="post")
                 .field
-                    label(for="user-id") User ID
-                    input(type="text", name="user-id" placeholder="User ID")
+                    label(for="user_id") User ID
+                    input(type="text", name="user_id" placeholder="User ID")
                 .field
-                    label(for="user-password") User Password
-                    input(type="password", name="user-password" placeholder="User Password")
+                    label(for="user_password") User Password
+                    input(type="password", name="user_password" placeholder="User Password")
                 .field
-                    label(for="user-password-check") User Password Reinput
-                    input(type="password", name="user-password-check" placeholder="User Password Reinput")
+                    label(for="user_password_check") User Password Reinput
+                    input(type="password", name="user_password_check" placeholder="User Password Reinput")
                 .field
-                    label(for="user-name") User Name
-                    input(type="text", name="user-name" placeholder="User Name")
+                    label(for="user_name") User Name
+                    input(type="text", name="user_name" placeholder="User Name")
                 .field
-                    label(for="user-birth") User Birth
-                    input(type="text", name="user-birth" placeholder="2000-12-12")
+                    label(for="user_birth") User Birth
+                    input(type="text", name="user_birth" placeholder="2000-12-12")
                 .field
                     input.ui.button(type="submit", value="회원가입")
                     input.ui.button(type="reset", value="초기화")
+            if message
+                <div class="ui error message" style="display: block;">
+                    |#{message}
+                </div>
     script(src="/javascripts/signup.bundle.js")
