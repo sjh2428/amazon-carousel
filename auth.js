@@ -7,8 +7,8 @@ module.exports = {
         if (req.user) next();
         else res.redirect("/login");
     },
-    onlyAdmin(req, res) {
-        if (req.user.admin) next();
+    onlyAdmin(req, res, next) {
+        if (req.user && req.user.admin) next();
         else res.redirect("/");
     }
 }
