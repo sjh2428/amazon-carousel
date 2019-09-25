@@ -1,14 +1,14 @@
 const passport = require("passport");
 const express = require('express');
 const router = express.Router();
-const auth = require("../auth");
+const { onlyPublic } = require("../auth");
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
     res.render('index', req.user ? { user: req.user } : { user: undefined });
 });
 
-router.get("/login", (req, res, next) => {
+router.get("/login", onlyPublic, (req, res, next) => {
     const flashMsg = req.flash().error;
     res.render("login", { message: flashMsg ? flashMsg : undefined });
 });
