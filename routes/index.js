@@ -1,7 +1,7 @@
 const passport = require("passport");
 const express = require('express');
 const router = express.Router();
-const sqlQuery = require("../models/sqlQuery");
+const sqlQuery = require("../models/sql_query");
 const { onlyPublic } = require("../auth");
 
 /* GET home page. */
@@ -31,7 +31,7 @@ router.get("/logout", (req, res) => {
 
 router.get("/sign-up", (req, res) => {
     const flashMsg = req.flash("signup_err");
-    res.render("sign-up", { message: flashMsg.length > 0 ? flashMsg : undefined });
+    res.render("sign_up", { message: flashMsg.length > 0 ? flashMsg : undefined });
 });
 
 router.post("/sign-up", async(req, res) => {
@@ -41,7 +41,7 @@ router.post("/sign-up", async(req, res) => {
     console.log(sqlResult);
     if (!sqlResult) {
         req.flash("signup_err", "회원가입 실패!\n아이디 중복 또는 생일 오류");
-        res.redirect("/sign-up");
+        res.redirect("/sign_up");
     } else {
         res.redirect("/login");
     }

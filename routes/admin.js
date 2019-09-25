@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require("../auth");
-const sqlQuery = require("../models/sqlQuery");
+const sqlQuery = require("../models/sql_query");
 
 router.get("/", auth.onlyAdmin, (req, res) => {
     res.render("admin/admin", { user: req.user });
