@@ -1,5 +1,27 @@
 extends admin_layout
 
 block content
-
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>User Name</th>
+                <th>User Birth</th>
+                <th>User Auth Manage</th>
+            </tr>
+        </thead>
+        <tbody>
+            if usersData
+                each user in userData
+                    <tr>
+                        <td data-label="User ID">#{user.user_id}</td>
+                        <td data-label="User Name">#{user.name}</td>
+                        <td data-label="User Birth">#{user.birth}</td>
+                        <td data-label="User Auth Manage">
+                            <a class="ui primary basic button">To Administrator</a>
+                            <a class="ui secondary basic button">To User</a>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
     script(src="/javascripts/admin.bundle.js")
