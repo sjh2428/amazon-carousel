@@ -9,11 +9,11 @@ const pool = mysql.createPool({
     database: process.env.SQL_DB
 });
 
-const query = async () => {
+const query = async (sql) => {
 	try {
 		const connection = await pool.getConnection(async conn => conn);
 		try {
-			const [rows] = await connection.query('select * from user');
+			const [rows] = await connection.query(sql);
 			return rows;
 		} catch(err) {
 			console.log('Query Error');

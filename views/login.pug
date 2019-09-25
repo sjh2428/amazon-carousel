@@ -8,7 +8,7 @@ block content
                 <div class="ui stacked segment">
                     <div class="field">
                     <div class="ui input">
-                        <input type="text" name="email" placeholder="E-mail address">
+                        <input type="text" name="userid" placeholder="User ID">
                     </div>
                     </div>
                     <div class="field">
@@ -18,7 +18,10 @@ block content
                     </div>
                     <input type="submit" class="ui fluid large teal submit button" value="Login">
                 </div>
-                <div class="ui error message"></div>
+                if message
+                    <div class="ui error message" style="display: block;">
+                        |#{message}
+                    </div>
             </form>
             <div class="ui message">
                 |New to us? <a href="#">Sign Up</a>

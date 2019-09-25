@@ -7,18 +7,30 @@ const redis = require("redis");
 const session = require("express-session");
 const RedisStore = require("connect-redis")(session);
 const dotenv = require("dotenv");
+const helmet = require("helmet");
+const passport = require("passport");
+const flash = require("connect-flash");
 
-const redisClient = redis.createClient();
 const indexRouter = require("./routes/index");
 const apiRouter = require("./routes/api_router");
+const passportSetting = require("./passport");
 
 const app = express();
 
+app.use(helmet());
 dotenv.config();
+
+const redisClient = redis.createClient(process.env.REDIS_PORT, process.env.REMOTE_HOST);
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
+app.use(logger("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
 app.use(session({
     store: new RedisStore({
         client: redisClient,
@@ -26,21 +38,18 @@ app.use(session({
         port: process.env.REDIS_PORT
     }),
     secret: "secret",
-    resave: true, // 요청 때 세션이 수정된게 없으면 강제로 세션 저장
-    saveUninitialized: true, // 저장된게 없으면 세션 저장
-    cookie: {
-        path: "/",
-        httpOnly: true,
-        secure: false,
-        maxAge: 1000 * 60
-    }
+    resave: false, // 요청 때 세션이 수정된게 없으면 강제로 세션 저장
+    saveUninitialized: false, // 저장된게 없으면 세션 저장
+    cookie: { maxAge: 1000 * 60 }
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+passportSetting(passport);
+
+redisClient.on("connect", () => console.log("redis connected"));
+redisClient.on("error", (err) => console.log(err));
 
 app.use("/", indexRouter);
 app.use("/api", apiRouter);
