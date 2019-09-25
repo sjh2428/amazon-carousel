@@ -13,8 +13,10 @@ router.get("/users", auth.onlyAdmin, async(req, res) => {
     res.render("admin/users", { user: req.user, userData});
 });
 
-router.get("/item", auth.onlyAdmin, (req, res) => {
-
+router.get("/dealUser/:id", auth.onlyAdmin, async(req, res) => {
+    const { params: { id }, query: { to } } = req;
+    await adminController.authControl(id, to);
+    res.redirect("/admin/users");
 });
 
 router.get("/item/upload", auth.onlyAdmin, (req, res) => {

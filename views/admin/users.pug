@@ -19,19 +19,15 @@ block content
                         <td data-label="User Birth">#{user.birth}</td>
                         <td data-label="User Auth Manage">
                             if user.admin
-                                <a class="ui primary basic small button user-control-btn disabled">
+                                a(class="ui primary basic small button user-control-btn disabled")
                                     |To Administrator
-                                </a>
-                                <a class="ui secondary basic small button user-control-btn">
+                                a(class="ui secondary basic small button user-control-btn", href="/admin/dealUser/" + user.user_id + "?to=0")
                                     |To User
-                                </a>
                             else
-                                <a class="ui primary basic small button user-control-btn">
+                                a(class="ui primary basic small button user-control-btn", href="/admin/dealUser/" + user.user_id + "?to=1")
                                     |To Administrator
-                                </a>
-                                <a class="ui secondary basic small button user-control-btn disabled">
+                                a(class="ui secondary basic small button user-control-btn disabled")
                                     |To User
-                                </a>
                         </td>
                     </tr>
         </tbody>
