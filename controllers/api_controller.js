@@ -16,10 +16,9 @@ module.exports = {
         
         for (const crsData of carousel) {
             const { category, id, image, title, head, body, tail, link, created_by } = crsData;
-            result.carousel[category] = [];
+            if (!result.carousel[category]) result.carousel[category] = [];
             result.carousel[category].push({ id, image: URL + image, title, head, body, tail, link, created_by });
         }
-
         return result;
     }
 }
