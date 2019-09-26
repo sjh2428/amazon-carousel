@@ -15,6 +15,7 @@ const indexRouter = require("./routes/index");
 const apiRouter = require("./routes/api");
 const adminRouter = require("./routes/admin");
 const passportSetting = require("./passport");
+const initDatabase = require("./models/sql_init");
 
 const app = express();
 
@@ -71,5 +72,7 @@ app.use(function(err, req, res, next) {
 	res.status(err.status || 500);
 	res.render("error");
 });
+
+initDatabase();
 
 module.exports = app;
