@@ -135,6 +135,7 @@
 | name          | varchar(20) |             |
 | birth         | date        |             |
 | admin         | boolean     | DEFAULT 0   |
+
 **`item`**
 
 | Field | Type         | Options                               |
