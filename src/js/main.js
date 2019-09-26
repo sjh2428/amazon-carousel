@@ -1,4 +1,5 @@
 import "../sass/style.scss"
+import "@babel/polyfill"
 
 // import CarouselView from "./view/carousel_view";
 import CardCarouselView from "./view/main_carousel_view";

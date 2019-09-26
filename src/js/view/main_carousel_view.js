@@ -14,8 +14,8 @@ class CardCarouselView {
         this.mainDOM = document.querySelector(`.${containerWrap}`);
     }
 
-    getHTML() {
-        const { card, carousel } = this.model.getMiniCarouselData();
+    async getHTML() {
+        const { card, carousel } = await this.model.getMiniCarouselData();
         const { 
             classNames: {
                 main, wrapper, viewportWrap, leftBtn, moveBtn, viewport, ul, li, rightBtn,
@@ -87,8 +87,8 @@ class CardCarouselView {
         return html;
     }
 
-    render() {
-        this.mainDOM.innerHTML = this.getHTML();
+    async render() {
+        this.mainDOM.innerHTML = await this.getHTML();
     }
 }
 

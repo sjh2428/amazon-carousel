@@ -4,7 +4,7 @@ module.exports = {
     // entry file
     entry: {
         admin: "./src/js/admin.js",
-        main: "./src/js/main.js",
+        main: ["@babel/polyfill", "./src/js/main.js"],
         signup: "./src/js/signup.js"
     },
     // compile + bundling된 js파일이 저장될 경로와 이름 지정

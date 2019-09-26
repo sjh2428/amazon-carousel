@@ -17,11 +17,12 @@ class CardCarouselController {
             LEFT: true,
             RIGHT: false
         }
-        this.view.render();
-        this.view.mainDOM.addEventListener("click", (e) => this.handleEvent(e));
-        this.scrollPositionSetting();
-        this.liOrderPreSetting();
-        this.cardInitSetting();
+        this.view.render().then(() => {
+            this.view.mainDOM.addEventListener("click", (e) => this.handleEvent(e));
+            this.scrollPositionSetting();
+            this.liOrderPreSetting();
+            this.cardInitSetting();
+        });
     }
 
     liOrderPreSetting() {
