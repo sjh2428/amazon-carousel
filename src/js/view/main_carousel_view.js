@@ -15,7 +15,7 @@ class CardCarouselView {
     }
 
     async getHTML() {
-        const { card, carousel } = await this.model.getMiniCarouselData();
+        const { card, carousel } = await this.model.getCarouselData();
         const { 
             classNames: {
                 main, wrapper, viewportWrap, leftBtn, moveBtn, viewport, ul, li, rightBtn,
@@ -38,7 +38,7 @@ class CardCarouselView {
         Object.keys(card).forEach(key => {
             html += /*html*/`
             <div class="${cardWrapper}" style="background-image: ${card[key].gradient}">
-                <div class="${cardImage}" style="background-image: url('${card[key].imgSrc}')">
+                <div class="${cardImage}" style="background-image: url('${card[key].image}')">
                     <div class="${cardTitle}">${key}</div>
                 </div>
                 <div class="${cardBtnsWrapper}">`

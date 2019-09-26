@@ -3,8 +3,8 @@ dotenv.config();
 
 const AWS = require('aws-sdk');
 const toStream = require('buffer-to-stream');
-const endpoint = new AWS.Endpoint('https://kr.object.ncloudstorage.com');
-const region = 'kr-standard';
+const endpoint = new AWS.Endpoint(process.env.ENDPOINT);
+const region = process.env.REGION;
 const access_key = process.env.ACCESS_KEY;
 const secret_key = process.env.SECRET_KEY;
 

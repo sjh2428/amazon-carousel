@@ -6,12 +6,11 @@ class CarouselModel {
         this.data = data;
     }
 
-    async getMiniCarouselData() {
+    async getCarouselData() {
         // return this.data;
         return await fetch("/api/main-carousel")
         .then(res => res.json())
         .then(json => {
-            console.log(json);
             return json;
         });
     }

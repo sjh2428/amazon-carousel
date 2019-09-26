@@ -1,5 +1,5 @@
 const sqlQuery = require("./sql_query");
-const data = require("../routes/data/main_carousel");
+const data = require("../models/carousel_data/main_carousel");
 const uuidv1 = require("uuid/v1");
 
 module.exports = async() => {
@@ -7,7 +7,7 @@ module.exports = async() => {
     const getCards = (cardData) => {
         let query = "";
         for (const key of Object.keys(cardData)) {
-            query += `insert into card values("${key}", "${cardData[key].gradient}", "${cardData[key].imgSrc}");`;
+            query += `insert into card values("${key}", "${cardData[key].gradient}", "${cardData[key].image}");`;
         }
         return query;
     }
@@ -16,7 +16,7 @@ module.exports = async() => {
         let query = "";
         for (const category of Object.keys(itemData)) {
             for (const itemObject of itemData[category]) {
-                query += `insert into item(id, category, image_name, title, head, body, tail, link, created_by) values("${uuidv1()}", "${category}", "${itemObject.image}", "${itemObject.title}", "${itemObject.head}", "${itemObject.body}", "${itemObject.tail}", "${itemObject.link}", "admin");`;
+                query += `insert into item(id, category, image, title, head, body, tail, link, created_by) values("${uuidv1()}", "${category}", "${itemObject.image}", "${itemObject.title}", "${itemObject.head}", "${itemObject.body}", "${itemObject.tail}", "${itemObject.link}", "admin");`;
             }
         }
         return query;
@@ -33,12 +33,12 @@ module.exports = async() => {
     await sqlQuery(`create table if not exists card(
         category varchar(20) PRIMARY KEY,
         gradient varchar(255),
-        imgSrc varchar(255)
+        image varchar(255)
     );`);
     await sqlQuery(`create table if not exists item(
         id varchar(50) PRIMARY KEY,
         category varchar(20),
-        image_name varchar(255),
+        image varchar(255),
         title varchar(50),
         head varchar(100),
         body TEXT,

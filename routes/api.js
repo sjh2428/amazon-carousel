@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const mainCarouselData = require("../models/carousel_data/main_carousel.js");
+const { getHomeData } = require("../controllers/api_controller");
 const miniCarouselData = require("../models/carousel_data/mini_carousel.js");
 
-router.get("/main-carousel", (req, res) => {
-    res.json(mainCarouselData);
+router.get("/main-carousel", async(req, res) => {
+    console.log(JSON.stringify(await getHomeData(), null, 4));
+    res.json(await getHomeData());
 });
 
 router.get("/mini-carousel", (req, res) => {
