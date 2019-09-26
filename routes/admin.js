@@ -4,6 +4,7 @@ const { onlyAdmin } = require("../auth");
 const { getUsers, authControl, uploadAndInsertDB } = require("../controllers/admin_controller");
 const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
+const { iteration } = require("../util");
 
 router.get("/", onlyAdmin, (req, res) => {
     res.render("admin/admin", { user: req.user });
@@ -11,7 +12,7 @@ router.get("/", onlyAdmin, (req, res) => {
 
 router.get("/users", onlyAdmin, async(req, res) => {
     const userData = await getUsers(req.user.user_id);
-    for (user of userData) user.birth = new Date(user.birth).toLocaleDateString("ko-KR");
+    iteration(u => u.birth = new Date(u.birth).toLocaleDateString("ko-KR"), userData);
     res.render("admin/users", { user: req.user, userData});
 });
 
