@@ -8,7 +8,7 @@ class CarouselModel {
 
     async getCarouselData() {
         // return this.data;
-        return await fetch("/api/main-carousel")
+        return await fetch("/api/getItem")
         .then(res => res.json())
         .then(json => {
             return json;
