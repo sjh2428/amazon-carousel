@@ -22,7 +22,7 @@ router.post("/login",
     })
 );
 
-router.get("/logout", onlyPrivate, (req, res) => {
+router.get("/logout", (req, res) => {
     req.logout();
     req.session.destroy((err) => {
         res.redirect("/");
@@ -43,7 +43,7 @@ router.post("/sign-up", onlyPublic, async(req, res) => {
         req.flash("signup_err", "회원가입 실패!\n아이디 중복 또는 생일 오류");
         res.redirect("/sign_up");
     } else {
-        res.redirect("/login");
+        res.redirect("/");
     }
 });
 
