@@ -12,7 +12,7 @@ router.get("/", onlyAdmin, (req, res) => {
 
 router.get("/users", onlyAdmin, async(req, res) => {
     const userData = await getUsers(req.user.user_id);
-    iteration(u => u.birth = new Date(u.birth).toLocaleDateString("ko-KR"), userData);
+    for (const user of userData) user.birth = new Date(user.birth).toLocaleDateString("ko-KR");
     res.render("admin/users", { user: req.user, userData});
 });
 

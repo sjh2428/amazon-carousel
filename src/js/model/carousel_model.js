@@ -10,9 +10,7 @@ class CarouselModel {
         // return this.data;
         return await fetch("/api/getItem")
         .then(res => res.json())
-        .then(json => {
-            return json;
-        });
+        .then(json => json);
     }
 }
 
