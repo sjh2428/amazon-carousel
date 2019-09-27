@@ -4,6 +4,8 @@ html
         link(rel="stylesheet", href="/semantic/semantic.min.css")
         title Amazon
     body
+        span(style="position: absolute; top: 2rem; left: 2rem;")
+            a(href="/") 🚕Home
         if user
             span(style="position: absolute; top: 2rem; right: 2rem;")
                 |#{user.user_id}님 환영합니다.  |  
