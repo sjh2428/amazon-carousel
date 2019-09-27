@@ -6,7 +6,12 @@ block content
             form(action="/admin/item/upload", method="post" enctype="multipart/form-data")
                 .field
                     label(for="Category") Category
-                    input(type="text", name="Category" placeholder="Category")
+                    select(type="text", name="Category" placeholder="Category" style="height: 2.75rem;")
+                        option(value="Ship") Ship
+                        option(value="Shop" selected) Shop
+                        option(value="Stream") Stream
+                        option(value="More") More
+                        option(value="Read") Read
                 .field
                     label(for="Title") Title
                     input(type="text", name="Title" placeholder="Title")

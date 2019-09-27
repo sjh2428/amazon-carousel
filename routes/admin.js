@@ -4,7 +4,6 @@ const { onlyAdmin } = require("../auth");
 const { getUsers, authControl, uploadAndInsertDB } = require("../controllers/admin_controller");
 const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
-const { iteration } = require("../util");
 
 router.get("/", onlyAdmin, (req, res) => {
     res.render("admin/admin", { user: req.user });
