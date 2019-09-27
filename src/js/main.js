@@ -8,7 +8,7 @@ import CarouselModel from "./model/carousel_model";
 import CardCarouselController from "./controller/main_carousel_controller";
 
 // import miniCarouselData from "./model/data/mini_carousel";
-import mainCarouselData from "./model/data/main_carousel";
+// import mainCarouselData from "./model/data/main_carousel";
 
 // import miniCarouselConfig from "./config/mini_carousel_config";
 import mainCarouselConfig from "./config/main_carousel_config";
@@ -22,7 +22,7 @@ import mainCarouselConfig from "./config/main_carousel_config";
 // MiniCarouselInit();
 
 const mainCarouselInit = () => {
-    const Model = new CarouselModel(mainCarouselData);
+    const Model = new CarouselModel();
     const View = new CardCarouselView(Model, mainCarouselConfig);
     const Controller = new CardCarouselController(View, mainCarouselConfig);
 }

@@ -2,14 +2,14 @@ const passport = require("passport");
 const express = require('express');
 const router = express.Router();
 const sqlQuery = require("../models/sql_query");
-const { onlyPublic, onlyPrivate } = require("../auth");
+const { onlyPublic } = require("../auth");
 
 /* GET home page. */
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
     res.render('index', req.user ? { user: req.user } : { user: undefined });
 });
 
-router.get("/login", onlyPublic, (req, res, next) => {
+router.get("/login", onlyPublic, (req, res) => {
     const flashMsg = req.flash().error;
     res.render("login", { user: req.user, message: flashMsg ? flashMsg : undefined });
 });
@@ -38,7 +38,6 @@ router.post("/sign-up", onlyPublic, async(req, res) => {
     const { user_id, user_password, user_name, user_birth } = req.body;
     const sqlResult = await sqlQuery(`insert into user(user_id, user_password, name, birth) 
                                         values('${user_id}', '${user_password}', '${user_name}', '${user_birth}')`);
-    console.log(sqlResult);
     if (!sqlResult) {
         req.flash("signup_err", "회원가입 실패!\n아이디 중복 또는 생일 오류");
         res.redirect("/sign_up");
